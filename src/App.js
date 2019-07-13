@@ -6,10 +6,12 @@ import routes from './routes';
 
 function App() {
   return (
-    <div>
+    <div id='wrapper'>
       <Header />
-      
-      {routes}
+
+      <main>
+        {routes}
+      </main>
 
       <Footer />
     </div>

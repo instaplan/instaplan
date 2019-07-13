@@ -2,9 +2,9 @@ import React from 'react';
 
 function CreateEvent() {
    return (
-      <div>
+      <section>
          <h1>Create Event</h1>
-      </div>
+      </section>
    )
 }
 

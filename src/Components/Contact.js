@@ -1,11 +1,11 @@
 import React from 'react';
 
-function ViewEvent() {
+function Contact() {
    return (
       <section>
-         <h1>View Event</h1>
+         <h1>Contact</h1>
       </section>
    )
 }
 
-export default ViewEvent;
+export default Contact;

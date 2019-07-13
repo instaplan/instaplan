@@ -2,10 +2,10 @@ import React from 'react';
 
 function BrowseEvents() {
    return (
-      <div>
+      <section>
          <h1>Browse Events</h1>
          
-      </div>
+      </section>
    )
 }
 

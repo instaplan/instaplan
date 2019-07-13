@@ -21,9 +21,9 @@ class Header extends Component {
       const {signedIn} = this.state;
 
       return (
-         <div>
+         <header>
             <div>
-               <h2>[🤔LOGO]</h2>
+               <h2>instaplan</h2>
             </div>
             <ul>
                <li><Link to='/'>Home</Link></li>
@@ -39,7 +39,7 @@ class Header extends Component {
                }
                
             </ul>
-         </div>
+         </header>
       )
    }
 }

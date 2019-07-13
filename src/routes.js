@@ -6,6 +6,7 @@ import ViewEvent from './Components/ViewEvent';
 import CreateEvent from './Components/CreateEvent';
 import Settings from './Components/Settings';
 import About from './Components/About';
+import Contact from './Components/Contact';
 import NotFound404 from './Components/NotFound404';
 
 export default (
@@ -16,6 +17,7 @@ export default (
       <Route component={BrowseEvents} path='/events' />
       <Route component={Settings} path='/settings' />
       <Route component={About} path='/about' />
+      <Route component={Contact} path='/contact' />
       <Route component={NotFound404} />
    </Switch>
 );
