@@ -9,11 +9,12 @@ import Settings from './Components/Settings';
 import About from './Components/About';
 import Contact from './Components/Contact';
 import NotFound404 from './Components/NotFound404';
+import Authorization from './component/authorization';
 
 export default (
    <Switch>
       <Route component={Landing} exact path='/' />
-      <Route component={Auth} path='/auth' />
+      <Route component={Authorization} path='/auth' />
       <Route component={CreateEvent} path='/events/create' />
       <Route component={ViewEvent} path='/events/:eventId' />
       <Route component={BrowseEvents} path='/events' />
