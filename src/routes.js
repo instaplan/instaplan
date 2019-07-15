@@ -1,6 +1,7 @@
 import React from 'react';
 import {Switch, Route} from 'react-router-dom';
 import Landing from './Components/Landing';
+import Auth from './Components/Auth';
 import BrowseEvents from './Components/BrowseEvents';
 import ViewEvent from './Components/ViewEvent';
 import CreateEvent from './Components/CreateEvent';
@@ -12,6 +13,7 @@ import NotFound404 from './Components/NotFound404';
 export default (
    <Switch>
       <Route component={Landing} exact path='/' />
+      <Route component={Auth} path='/auth' />
       <Route component={CreateEvent} path='/events/create' />
       <Route component={ViewEvent} path='/events/:eventId' />
       <Route component={BrowseEvents} path='/events' />

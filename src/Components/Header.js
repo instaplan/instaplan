@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 
 class Header extends Component {
    constructor(props) {
@@ -11,10 +11,12 @@ class Header extends Component {
       this.handleSignOut = this.handleSignOut.bind(this);
    }
    handleSignIn() {
-      this.setState({ signedIn: true})
+      this.setState({ signedIn: true});
+      this.props.history.push('/auth');
    }
    handleSignOut() {
-      this.setState({ signedIn: false })
+      this.setState({ signedIn: false });
+      this.props.history.push('/');
    }
    render() {
 
@@ -29,11 +31,12 @@ class Header extends Component {
                <li><Link to='/'>Home</Link></li>
                <li><Link to='/events'>Browse Events</Link></li>
                <li><Link to='/events/create'>Create Event</Link></li>
+               {/* conditionally render sign in / sign out */}
                {!signedIn
-                  ? <li><Link onClick={this.handleSignIn}>Sign In</Link></li> // sign in/out will not work until we hook up with auth
+                  ? <li><Link to='' onClick={this.handleSignIn}>Sign In</Link></li>
                   : (<>
                      <li><Link to='/settings'>Settings</Link></li>
-                     <li><Link onClick={this.handleSignOut}>Sign Out</Link></li>
+                     <li><Link to='' onClick={this.handleSignOut}>Sign Out</Link></li>
                   </>)
                
                }
@@ -44,4 +47,4 @@ class Header extends Component {
    }
 }
 
-export default Header;
+export default withRouter(Header);
