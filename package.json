@@ -11,6 +11,8 @@
     "nodemon": "^1.19.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-google-maps-loader": "^4.2.5",
+    "react-google-places-suggest": "^3.8.0",
     "react-scripts": "3.0.1"
   },
   "scripts": {
