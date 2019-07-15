@@ -30,6 +30,7 @@ export default class GoogleSuggest extends Component {
     handleLocationChange = e => {
         this.setState({search: e.target.value, value: e.target.value})
     }
+
     handleFormDataChange(e) {
        const {name, value} = e.target;
        this.setState({ [name]: value })
@@ -50,6 +51,7 @@ export default class GoogleSuggest extends Component {
  
     render() {
         const {search, value} = this.state
+
         return (
             <div>
                {/* IMAGE */}
@@ -78,6 +80,7 @@ export default class GoogleSuggest extends Component {
                   name='date'
                   onChange={this.handleFormDataChange}
                />
+
             {/* // BEGIN GOOGLE ADDRESS INPUT */}
             <GoogleMapLoader
                 params={{
@@ -117,6 +120,7 @@ export default class GoogleSuggest extends Component {
                 }
             />
             {/* // END GOOGLE ADDRESS INPUT */}
+
             {/* CATEGORY */}
             <select
             value={this.state.category}
@@ -136,12 +140,20 @@ export default class GoogleSuggest extends Component {
             name='description'
             onChange={this.handleFormDataChange}
          />
+
          {/* FORM BUTTONS */}
          <div>
             <button>Submit</button>
             <button>Cancel</button>
          </div>
       </div>
+
+
+
+
         )
     }
 }
+
+
+
