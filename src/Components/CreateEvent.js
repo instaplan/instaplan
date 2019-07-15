@@ -65,7 +65,6 @@ export default class GoogleSuggest extends Component {
                   />
                   <button onClick={() => document.getElementById('selectedFile').click()}>Choose</button>
                </span>
-
                {/* TITLE */}
                <input
                   placeholder='title'
@@ -74,7 +73,6 @@ export default class GoogleSuggest extends Component {
                   name='title'
                   onChange={this.handleFormDataChange}
                />
-
                {/* DATE */}
                <input  
                   type='date'
@@ -82,7 +80,6 @@ export default class GoogleSuggest extends Component {
                   name='date'
                   onChange={this.handleFormDataChange}
                />
-
 
             {/* // BEGIN GOOGLE ADDRESS INPUT */}
             <GoogleMapLoader
@@ -153,8 +150,10 @@ export default class GoogleSuggest extends Component {
 
 
 
+
         )
     }
 }
+
 
 
