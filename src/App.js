@@ -6,6 +6,7 @@ import routes from './routes';
 
 function App() {
   return (
+
     <div id='wrapper'>
       <Header />
 
@@ -14,6 +15,9 @@ function App() {
       </main>
 
       <Footer />
+
+  
+
     </div>
   );
 }
