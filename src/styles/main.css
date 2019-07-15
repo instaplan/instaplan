@@ -1,4 +1,43 @@
-h1 {
-  font-size: 4em;
+body, body {
+  margin: 0;
+  padding: 0;
+}
+
+footer {
+  color: #FFF;
+  background-color: #272831;
+  margin: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  width: 100vw;
+  max-width: 100%;
+}
+
+footer li {
+  text-decoration: none;
+}
+
+.footer {
+  color: #FFF;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.footer a {
+  color: #FFF;
+  text-decoration: none;
 }
 /*# sourceMappingURL=main.css.map */

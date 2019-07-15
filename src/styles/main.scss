@@ -1,3 +1,37 @@
-h1 {
-    font-size: 4em;
+// @mixin flexCenter {
+//     display: flex;
+//     justify-content: space-around;
+//     align-items: center;
+// }
+
+body,body {
+    margin: 0;
+    padding: 0;
+}
+
+footer {
+    color: #FFF;
+    background-color: #272831;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    max-width: 100%;
+}
+
+footer li {
+    text-decoration: none;
+}
+
+.footer {
+    color: #FFF;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    a {
+        color: #FFF;
+        text-decoration: none;
+    }
+    
 }
