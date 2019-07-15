@@ -22,5 +22,5 @@ massive(process.env.CONNECTION_STRING).then(db => {
 
 
 app.listen(4000, () => {
-    console.log(`Server is Listening on port 8080`)
+    console.log(`Server is Listening on port 4000`)
 })
