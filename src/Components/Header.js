@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
 import {Link, withRouter} from 'react-router-dom';
+import {connect} from 'react-redux';
+import updateIsSignedIn from '../ducks/userReducer';
 
 class Header extends Component {
    constructor(props) {
       super(props);
       this.state = {
-          signedIn: false // temporary variable for conditional styling until auth hooked up
+          signedIn: false, // temporary variable for conditional styling until auth hooked up
+          modal: false
       };
       this.handleSignIn = this.handleSignIn.bind(this);
       this.handleSignOut = this.handleSignOut.bind(this);
@@ -47,4 +50,8 @@ class Header extends Component {
    }
 }
 
-export default withRouter(Header);
+export default withRouter(connect(null, 
+   {
+      updateIsSignedIn
+   }
+)(Header));
