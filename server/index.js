@@ -3,7 +3,7 @@ const massive = require('massive');
 require ('dotenv').config();
 
 
-const {SERVER_PORT, CONNECTION_STRING, API_KEY} = process.env
+const {SERVER_PORT, CONNECTION_STRING} = process.env
 
 
 const app = express();
