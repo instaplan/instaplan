@@ -2,10 +2,12 @@ import React, {Component}from 'react';
 import firebase from 'firebase'
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 import { thisExpression } from '@babel/types';
+import GoogleSuggest from '../Components/CreateEvent';
+require ('dotenv').config();
 
 
 firebase.initializeApp({
-    apiKey:"AIzaSyAptYBKyKOnx7vUpYLMJNP_LbPrU6yohGs",
+    apiKey:  process.env.API_KEY,
     authDomain:"event-finder-68c32.firebaseapp.com"
 })
 
@@ -48,6 +50,10 @@ class Authorization extends Component {
               alt="profile picture"
               src={firebase.auth().currentUser.photoURL}
             />
+            <div>
+              <GoogleSuggest />
+            </div>
+
           </span>
         ) : (
           <StyledFirebaseAuth
