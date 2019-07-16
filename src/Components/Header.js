@@ -23,7 +23,7 @@ class Header extends Component {
       this.state = {
           signedIn: false, // temporary variable for conditional styling until auth hooked up
 
-          isOpen: false //toggle for navbar
+          isOpen: false ,//toggle for navbar
 
           modal: false
 
