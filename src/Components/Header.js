@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link, withRouter} from 'react-router-dom';
+import firebase from 'firebase'
 
 import {
    Collapse,
@@ -17,11 +18,12 @@ import {connect} from 'react-redux';
 import updateIsSignedIn from '../ducks/userReducer';
 
 
+
 class Header extends Component {
    constructor(props) {
       super(props);
       this.state = {
-          signedIn: false, // temporary variable for conditional styling until auth hooked up
+          // signedIn: false, // temporary variable for conditional styling until auth hooked up
 
 
           isOpen: false, //toggle for navbar
@@ -31,7 +33,7 @@ class Header extends Component {
 
       };
 
-      this.handleSignIn = this.handleSignIn.bind(this);
+      // this.handleSignIn = this.handleSignIn.bind(this);
       this.handleSignOut = this.handleSignOut.bind(this);
       this.toggle = this.toggle.bind(this);
    }
@@ -41,22 +43,22 @@ class Header extends Component {
          isOpen: !this.state.isOpen
       })
    }
-   handleSignIn() {
-      this.setState({ signedIn: true});
-      this.props.history.push('/auth');
-   }
+   // handleSignIn() {
+   //    this.setState({ signedIn: true});
+   //    this.props.history.push('/');
+      
+   // }
    handleSignOut() {
-      this.setState({ signedIn: false });
+      this.setState({ signedIn: false});
       this.props.history.push('/');
+      firebase.auth().signOut()
    }
    render() {
-
-      const {signedIn} = this.state;
 
       return (
          <header>
             <Navbar color="light" light expand="md">
-               <NavbarBrand href="/">instaplan</NavbarBrand>
+               <NavbarBrand href="/">Instaplan</NavbarBrand>
                <NavbarToggler onClick={this.toggle} />
                <Collapse isOpen={this.state.isOpen} navbar>
                   <Nav className="ml-auto" navbar>
@@ -67,12 +69,12 @@ class Header extends Component {
                      <NavLink tag={Link} to="/events">Browse Events</NavLink>
                   </NavItem>
                   <NavItem>
-                     <NavLink tag={Link} to='/events/create'>Create Event</NavLink>
+                     {/* <NavLink tag={Link} to='/events/create'>Create Event</NavLink> */}
                   </NavItem>
               
                  {/* conditionally render sign in / sign out */}
-                  {!signedIn
-                  ? <NavItem><NavLink tag={Link} to='' onClick={this.handleSignIn}>Sign In</NavLink></NavItem>
+                  {!this.props.isSignedIn
+                  ? <NavItem><NavLink tag={Link} to='/events/create' onClick = {this.handleSignIn}>Create Event</NavLink></NavItem>
                   : (<>
                      <NavItem>
                         <NavLink tag={Link} to='/settings'>Settings</NavLink>
@@ -92,7 +94,13 @@ class Header extends Component {
    }
 }
 
-export default withRouter(connect(null, 
+const mapStateToProps = reduxState => {
+   return {
+     isSignedIn: reduxState.user.isSignedIn
+   }
+ }
+
+export default withRouter(connect(mapStateToProps, 
    {
       updateIsSignedIn
    }

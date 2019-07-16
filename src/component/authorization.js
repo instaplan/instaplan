@@ -1,7 +1,9 @@
 import React, {Component}from 'react';
 import firebase from 'firebase'
+import {connect} from 'react-redux';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 import GoogleSuggest from '../Components/CreateEvent';
+import {updateIsSignedIn} from '../ducks/userReducer';
 
 import {API_KEY} from '../config/config';
 
@@ -16,9 +18,6 @@ firebase.initializeApp({
 
 
 class Authorization extends Component {
-    state ={
-        isSignedIn: false
-    }
 
     uiConfig = {
         signInFlow: "redirect",
@@ -36,17 +35,17 @@ class Authorization extends Component {
       componentDidMount =() =>{
          
           firebase.auth().onAuthStateChanged(user => {
-              this.setState({isSignedIn: !!user})
+              this.props.updateIsSignedIn(!!user)
           })
       }
 
     render() {
   return (
     <div className="App">
-           {this.state.isSignedIn ? (
+           {this.props.isSignedIn ? (
           <span>
             <div>Signed In!</div>
-            <button onClick={() => firebase.auth().signOut()}>Sign out!</button>
+            {/* <button onClick={() => firebase.auth().signOut()}>Sign out!</button> */}
             <h1>Welcome {firebase.auth().currentUser.displayName}</h1>
             <img
               alt="profile picture"
@@ -68,4 +67,14 @@ class Authorization extends Component {
 }
 }
 
-export default Authorization;
+const mapStateToProps = reduxState => {
+  return {
+    isSignedIn: reduxState.user.isSignedIn
+  }
+}
+
+export default connect(mapStateToProps,
+  {
+    updateIsSignedIn
+  }
+)(Authorization);
