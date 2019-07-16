@@ -3,11 +3,12 @@ import firebase from 'firebase'
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 import { thisExpression } from '@babel/types';
 import GoogleSuggest from '../Components/CreateEvent';
-require ('dotenv').config();
+import {API_KEY} from '../config/config'
+
 
 
 firebase.initializeApp({
-    apiKey:  process.env.API_KEY,
+    apiKey: API_KEY,
     authDomain:"event-finder-68c32.firebaseapp.com"
 })
 
