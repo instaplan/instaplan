@@ -5,6 +5,7 @@
   "proxy": "http://localhost:4000",
   "main": "server/index",
   "dependencies": {
+    "bootstrap": "^4.3.1",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "firebase": "^6.3.0",
@@ -12,12 +13,22 @@
     "nodemon": "^1.19.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+
+
+
     "react-firebaseui": "^3.1.2",
+
+
+
     "react-google-maps-loader": "^4.2.5",
     "react-google-places-suggest": "^3.8.0",
     "react-redux": "^7.1.0",
     "react-router-dom": "^5.0.1",
+
+
+
     "react-scripts": "3.0.1",
+
     "reactstrap": "^8.0.1",
     "redux": "^4.0.4"
   },
