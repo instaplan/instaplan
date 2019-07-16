@@ -1,8 +1,11 @@
 import React, {Component}from 'react';
 import firebase from 'firebase'
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
-import { thisExpression } from '@babel/types';
 import GoogleSuggest from '../Components/CreateEvent';
+
+import {API_KEY} from '../config/config';
+
+
 
 
 firebase.initializeApp({
