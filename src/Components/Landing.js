@@ -33,14 +33,14 @@ const items = [
          <UncontrolledCarousel items={items} />
 
          
-            <h2 className='landing-header'>Featured Events</h2>
+         <h2 className='landing-header'>Featured Events</h2>
          <section className='landing'>
             <article>
                <figure>
                   <img src='https://cdn.dribbble.com/users/56953/screenshots/6103123/thrive_conference_2019_v2.jpg' alt='Event' />
                   <figcaption>[EVENT NAME]</figcaption>
                </figure>
-               <time dateTime='2019-01-01'>[TIME and DATE]</time>
+               <time className='time' dateTime='2019-01-01'>Tue, Jul 16, 9:00am</time>
                <p>[CITY], [STATE] - [DESC] This is the description of the event and will show a SUMMARY with the<Link to='/events/1'>...(more)</Link></p> 
             </article>
 
