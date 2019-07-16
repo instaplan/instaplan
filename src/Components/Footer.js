@@ -4,8 +4,8 @@ import {Link} from 'react-router-dom';
 function Footer() {
    return (
       <footer>
+         <ul className='footer'>
          <p>&copy;2019 The Instaplan Group</p>
-         <ul class='footer'>
             <div>
                <li><Link to='/about'>About</Link></li>
             </div>
