@@ -3,10 +3,12 @@ import GoogleMapLoader from "react-google-maps-loader"
 import GooglePlacesSuggest from "react-google-places-suggest"
 import { API_KEY } from "../config/config"
 import axios from 'axios'
+import {connect} from 'react-redux';
+import firebase from 'firebase'
 
 const MY_API_KEY = API_KEY // fake
 
-export default class GoogleSuggest extends Component {
+class GoogleSuggest extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -17,11 +19,17 @@ export default class GoogleSuggest extends Component {
             category: '',
             description: '',
             fileName: '',
-            fileUrl: 'https://via.placeholder.com/100x100.png?text=EVENT+PHOTO'
+            fileUrl: 'https://via.placeholder.com/100x100.png?text=EVENT+PHOTO',
+            userid: ''
         };
         this.handleFormDataChange = this.handleFormDataChange.bind(this);
         this.userImgHandler = this.userImgHandler.bind(this);
         this.handleAddEvent = this.handleAddEvent.bind(this);
+    }
+
+    componentDidMount( ) {this.setState({userid: firebase.auth().currentUser.uid})
+        
+
     }
     userImgHandler(file) {
         this.setState({
@@ -65,7 +73,9 @@ export default class GoogleSuggest extends Component {
             date: this.state.date,
             category: this.state.category,
             description: this.state.description,
-            value: this.state.value
+            value: this.state.value,
+            userid: this.state.userid
+
         }
         
         axios
@@ -184,5 +194,11 @@ export default class GoogleSuggest extends Component {
     }
 }
 
+const mapStateToProps = reduxState => {
+    return {
+        userId: reduxState.user.userId
+    }
+}
 
+export default connect(mapStateToProps)(GoogleSuggest)
 
