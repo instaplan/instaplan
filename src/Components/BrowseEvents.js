@@ -1,66 +1,76 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import { Button } from 'reactstrap';
 
 function BrowseEvents() {
    return (
-      <section>
-         <div>
-            [MAP ON HOVER]
-         </div>
-
+      <section className='browse-events'>
          <div> 
-            <form>
-               <select>
-                  <option value='' disabled selected>filter events</option>
-                  <option value='food'>Food</option>
-                  <option value='music'>Music</option>
-                  <option value=''>More categories to populate from db</option>
-               </select>
-               <input
+            <form className='browse-form' >
+            <input
                   type='text'
                   placeholder='search within name'
                />
-               <button>Search</button>
+               <div className="filter">
+                  <select>
+                     <option value='' disabled selected>filter events</option>
+                     <option value='food'>Food</option>
+                     <option value='music'>Music</option>
+                     <option value=''>More categories to populate from db</option>
+                  </select>
+                  
+                  <Button color="info">Search</Button>{' '}
+                </div>
             </form>
 
             <div>
-               <div>
-                  <img src='http://placekitten.com/200/150' alt='Event' />
-                  <div>
+               <div className='event-row'>
+                  <div className="event-image">
+                     <img src='http://placekitten.com/200/150' alt='Event' />
+                  </div>
+                  <div className='event-info' >
                      <Link to='/events/1'>
                         <h3>[TITLE]</h3>
                      </Link>
                      <p>[TIME] / [DATE]</p>
                      <p>LOCATION</p>
                   </div>
-                  <div>📨[SHARE ICON]</div>
+                  <div><img src="https://img.icons8.com/ios-glyphs/24/000000/share.png"/></div>
                </div>
 
-               <div>
-                  <img src='http://placekitten.com/200/150' alt='Event' />
-                  <div>
-                     <Link to='/events/2'>
+               <div className='event-row'>
+                  <div className="event-image">
+                     <img src='http://placekitten.com/200/150' alt='Event' />
+                  </div>
+                  <div className='event-info' >
+                     <Link to='/events/1'>
                         <h3>[TITLE]</h3>
                      </Link>
                      <p>[TIME] / [DATE]</p>
                      <p>LOCATION</p>
                   </div>
-                  <div>📨[SHARE ICON]</div>
+                  <div><img src="https://img.icons8.com/ios-glyphs/24/000000/share.png"/></div>
                </div>
 
-               <div>
-                  <img src='http://placekitten.com/200/150' alt='Event' />
-                  <div>
-                     <Link to='/events/3'>
+               <div className='event-row'>
+                  <div className="event-image">
+                     <img src='http://placekitten.com/200/150' alt='Event' />
+                  </div>
+                  <div className='event-info' >
+                     <Link to='/events/1'>
                         <h3>[TITLE]</h3>
                      </Link>
                      <p>[TIME] / [DATE]</p>
                      <p>LOCATION</p>
                   </div>
-                  <div>📨[SHARE ICON]</div>
-               </div>  
+                  <div><img src="https://img.icons8.com/ios-glyphs/24/000000/share.png"/></div>
+               </div>
             </div>
          </div>
+         <div className='browse-map'>
+            [MAP ON HOVER]
+            <img src="https://www.isu.edu/media/top-level/page-layouts/maps/campus-map.jpg" alt=""/>
+         </div>  
       </section>
    )
 }
