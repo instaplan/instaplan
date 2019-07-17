@@ -3,6 +3,7 @@ const express = require('express')
 const massive = require('massive');
 const nodemailer = require('nodemailer');
 const contact = require('./controllers/contact');
+const eventsController = require('./controllers/eventsController')
 
 
 
@@ -41,6 +42,16 @@ const transporter = nodemailer.createTransport(
 
   
 app.post('/api/contact', contact);
+
+
+// Events
+
+app.post('/api/events', eventsController.create);
+app.get('/api/events', eventsController.getAll);
+app.get('/api/events/:id', eventsController.getOne);
+app.put('/api/events/:id', eventsController.update);
+app.delete('/api/events/:id', eventsController.delete);
+
 
 app.listen(SERVER_PORT, () => {
     console.log(`Server is Listening on port ${SERVER_PORT}`)

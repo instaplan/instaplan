@@ -1,8 +1,9 @@
 import React, {Component} from "react"
 import GoogleMapLoader from "react-google-maps-loader"
 import GooglePlacesSuggest from "react-google-places-suggest"
+import {API_KEY} from "../config/config"
  
-const MY_API_KEY = "AIzaSyCGPX51O0IgwslhB7sVp6Y9Wh26Ts2Z9KU" // fake
+const MY_API_KEY = API_KEY // fake
  
 export default class GoogleSuggest extends Component {
    constructor(props) {
