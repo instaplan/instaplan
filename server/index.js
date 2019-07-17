@@ -4,7 +4,7 @@ const massive = require('massive');
 const nodemailer = require('nodemailer');
 const contact = require('./controllers/contact');
 const eventsController = require('./controllers/eventsController')
-
+const ebEventsController = require('./controllers/eventBrite');
 
 
 const {SERVER_PORT, CONNECTION_STRING, EMAIL_HOST, EMAIL_NAME, EMAIL_PW} = process.env
@@ -40,9 +40,11 @@ const transporter = nodemailer.createTransport(
   })
 
 
-  
+// contact form nodemailer
 app.post('/api/contact', contact);
 
+// eventbrite api call
+app.post('/api/ebevents', ebEventsController);
 
 // Events
 

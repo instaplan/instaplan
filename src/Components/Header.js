@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import firebase from 'firebase'
+import {connect} from 'react-redux';
+import {updateIsSignedIn, updateUserIPLocation} from '../ducks/userReducer';
+import {updateEvents} from '../ducks/eventsReducer';
 
 import {
    Collapse,
@@ -12,42 +15,32 @@ import {
    NavLink
    } from 'reactstrap';
 
-
-
-import {connect} from 'react-redux';
-import updateIsSignedIn from '../ducks/userReducer';
-
-
-
 class Header extends Component {
    constructor(props) {
       super(props);
       this.state = {
-          // signedIn: false, // temporary variable for conditional styling until auth hooked up
-
-
-          isOpen: false, //toggle for navbar
-
-
-          modal: false
-
+          isOpen: false //toggle for navbar
       };
-
-      // this.handleSignIn = this.handleSignIn.bind(this);
       this.handleSignOut = this.handleSignOut.bind(this);
       this.toggle = this.toggle.bind(this);
    }
+   componentDidMount() {
+      const {userLocation, updateUserIPLocation} = this.props;
 
+      // TO CODE: check if user signed in -- if not, grab geolocation for default events search and view
+      if (!userLocation.city) updateUserIPLocation()
+         
+   }
+   componentDidUpdate(prevProps) {
+      if (this.props.userLocation.city && prevProps.userLocation !== this.props.userLocation) {
+         this.props.updateEvents(this.props.userLocation);
+      }
+   }
    toggle(){
       this.setState({
          isOpen: !this.state.isOpen
       })
    }
-   // handleSignIn() {
-   //    this.setState({ signedIn: true});
-   //    this.props.history.push('/');
-      
-   // }
    handleSignOut() {
       this.setState({ signedIn: false});
       this.props.history.push('/');
@@ -55,10 +48,12 @@ class Header extends Component {
    }
    render() {
 
+      console.log(this.props.userLocation)
+
       return (
          <header>
             <Navbar color="light" light expand="md">
-               <NavbarBrand href="/">Instaplan</NavbarBrand>
+               <NavbarBrand href="/">Instaplan {this.props.userLocation.city}, {this.props.userLocation.state}</NavbarBrand>
                <NavbarToggler onClick={this.toggle} />
                <Collapse isOpen={this.state.isOpen} navbar>
                   <Nav className="ml-auto" navbar>
@@ -96,12 +91,15 @@ class Header extends Component {
 
 const mapStateToProps = reduxState => {
    return {
-     isSignedIn: reduxState.user.isSignedIn
+     isSignedIn: reduxState.user.isSignedIn,
+     userLocation: reduxState.user.userLocation
    }
  }
 
 export default withRouter(connect(mapStateToProps, 
    {
-      updateIsSignedIn
+      updateIsSignedIn,
+      updateUserIPLocation,
+      updateEvents
    }
 )(Header));
