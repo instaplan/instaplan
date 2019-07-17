@@ -1,9 +1,9 @@
 module.exports = {
     create: (req, res, next) => {
       const dbInstance = req.app.get('db');
-      const {awskey, awsurl, title, date, category, description, location} = req.body;
+      const {awskey, awsurl, title, date, category, description, value} = req.body;
   
-      dbInstance.create_events([awskey, awsurl, title, date, category, description, location])
+      dbInstance.create_events([awskey, awsurl, title, date, category, description, value])
         .then(() => res.sendStatus(200))
         .catch(err => {
           res.status(500).send({ errorMessage: "Oops! Something went wrong." });
