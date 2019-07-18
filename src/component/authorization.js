@@ -10,7 +10,7 @@ import {API_KEY} from '../config/config';
 // this.props.updateUserID(firebase.auth().currentUser.uid) //
 
 
-firebase.initializeApp({
+firebase.initializeApp({ 
     apiKey:"AIzaSyAptYBKyKOnx7vUpYLMJNP_LbPrU6yohGs",
     authDomain:"event-finder-68c32.firebaseapp.com"
 })
