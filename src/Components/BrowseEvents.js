@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import { Button } from 'reactstrap';
 import {connect} from 'react-redux';
 import {updateEvents} from '../ducks/eventsReducer';
+import UsersEventList from './UsersEventList';
 
 class BrowseEvents extends Component {
    componentDidMount() {
@@ -16,6 +17,57 @@ class BrowseEvents extends Component {
    render() {
 
       const{events} = this.props;
+
+      return (
+      <div>
+         
+         <div className='event-row' key={i}>
+            <div className="event-image">
+               <img src={event.logo.original.url} alt='Event' />
+            </div>
+            <div className='event-info' >
+               <Link to='/events/1'>
+                  <h3>{event.name.text}</h3>
+               </Link>
+               <p>start {event.start.local} / end {event.end.local}</p>
+               <p>LOCATION</p>
+            </div>
+            <div><img src="https://img.icons8.com/ios-glyphs/24/000000/share.png"/></div>
+         </div>
+         </div>
+      );
+   })
+
+
+   return (
+      <section className='browse-events'>
+         <div> 
+            <form className='browse-form' >
+            <input
+                  type='text'
+                  placeholder='search within name'
+               />
+               <div className="filter">
+                  <select>
+                     <option value='' disabled selected>filter events</option>
+                     <option value='food'>Food</option>
+                     <option value='music'>Music</option>
+                     <option value=''>More categories to populate from db</option>
+                  </select>
+                  
+                  <Button color="info">Search</Button>{' '}
+                </div>
+            </form>
+            <UsersEventList />
+            {eventsMapped}
+            
+         </div>
+         <div className='browse-map'>
+            [MAP ON HOVER]
+            <img src="https://www.isu.edu/media/top-level/page-layouts/maps/campus-map.jpg" alt=""/>
+         </div>  
+      </section>
+   )
 
       const eventsMapped = events.length > 0 && events.map((event, i) => {
          return (
@@ -65,6 +117,7 @@ class BrowseEvents extends Component {
          </section>
       )
    }
+
 }
 
 const mapStateToProps = reduxState => {
