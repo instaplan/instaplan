@@ -8,9 +8,6 @@ const initialState = {
 const UPDATE_IS_SIGNED_IN = 'UPDATE_IS_SIGNED_IN';
 const UPDATE_USER_IPLOCATION = 'UPDATE_USER_IPLOCATION';
 
-
-
-
 export function updateIsSignedIn(status) {
    return {
       type: UPDATE_IS_SIGNED_IN,
