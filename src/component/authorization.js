@@ -49,7 +49,7 @@ class Authorization extends Component {
           <span>
             <div>Signed In!</div>
             {/* <button onClick={() => firebase.auth().signOut()}>Sign out!</button> */}
-            <h1>Welcome {firebase.auth().currentUser.uid}</h1>
+            <h1>Welcome {firebase.auth().currentUser.displayName}</h1>
             <img
               alt="profile picture"
               src={firebase.auth().currentUser.photoURL}
