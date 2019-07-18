@@ -1,9 +1,9 @@
 module.exports = {
     create: (req, res, next) => {
       const dbInstance = req.app.get('db');
-      const {photo, title, date, category, description} = req.body;
+      const {awskey, awsurl, title, date, category, description, value, userid} = req.body;
   
-      dbInstance.create_events([photo, title, date, category, description])
+      dbInstance.create_events([awskey, awsurl, title, date, category, description, value, userid])
         .then(() => res.sendStatus(200))
         .catch(err => {
           res.status(500).send({ errorMessage: "Oops! Something went wrong." });
@@ -36,10 +36,10 @@ module.exports = {
   
     update: (req, res, next) => {
       const dbInstance = req.app.get('db');
-      const {photo, title, date, category, description} = req.body;
+      const {awskey, awsurl, title, date, category, description, value, userid} = req.body;
       const { params} = req;
   
-      dbInstance.update_event([params.id, photo, title, date, category, description])
+      dbInstance.update_event([params.id, awskey, awsurl, title, date, category, description, value, userid])
         .then((response) => res.status(200).json(response))
         .catch(err => {
           res.status(500).send({ errorMessage: "Oops! Something went wrong." });
