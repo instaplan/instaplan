@@ -1,8 +1,42 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import { Button } from 'reactstrap';
+import {connect} from 'react-redux';
+import {updateEvents} from '../ducks/eventsReducer';
 
-function BrowseEvents() {
+function BrowseEvents(props) {
+
+   const {userLocation, events, updateEvents} = props;
+
+   // update events on render // userLocation param non-working
+   useEffect(() => {
+      updateEvents(userLocation)
+   }, [userLocation]);
+
+   const eventsMapped = events.length > 0 && events.map((event, i) => {
+
+      // const startTime = event.start.local.substring(11, 16);
+      // const endTime = event.end.local.substring(11, 16);
+
+
+      return (
+         <div className='event-row' key={i}>
+            <div className="event-image">
+               <img src={event.logo.original.url} alt='Event' />
+            </div>
+            <div className='event-info' >
+               <Link to='/events/1'>
+                  <h3>{event.name.text}</h3>
+               </Link>
+               <p>start {event.start.local} / end {event.end.local}</p>
+               <p>LOCATION</p>
+            </div>
+            <div><img src="https://img.icons8.com/ios-glyphs/24/000000/share.png"/></div>
+         </div>
+      );
+   })
+
+
    return (
       <section className='browse-events'>
          <div> 
@@ -23,49 +57,8 @@ function BrowseEvents() {
                 </div>
             </form>
 
-            <div>
-               <div className='event-row'>
-                  <div className="event-image">
-                     <img src='http://placekitten.com/200/150' alt='Event' />
-                  </div>
-                  <div className='event-info' >
-                     <Link to='/events/1'>
-                        <h3>[TITLE]</h3>
-                     </Link>
-                     <p>[TIME] / [DATE]</p>
-                     <p>LOCATION</p>
-                  </div>
-                  <div><img src="https://img.icons8.com/ios-glyphs/24/000000/share.png"/></div>
-               </div>
-
-               <div className='event-row'>
-                  <div className="event-image">
-                     <img src='http://placekitten.com/200/150' alt='Event' />
-                  </div>
-                  <div className='event-info' >
-                     <Link to='/events/1'>
-                        <h3>[TITLE]</h3>
-                     </Link>
-                     <p>[TIME] / [DATE]</p>
-                     <p>LOCATION</p>
-                  </div>
-                  <div><img src="https://img.icons8.com/ios-glyphs/24/000000/share.png"/></div>
-               </div>
-
-               <div className='event-row'>
-                  <div className="event-image">
-                     <img src='http://placekitten.com/200/150' alt='Event' />
-                  </div>
-                  <div className='event-info' >
-                     <Link to='/events/1'>
-                        <h3>[TITLE]</h3>
-                     </Link>
-                     <p>[TIME] / [DATE]</p>
-                     <p>LOCATION</p>
-                  </div>
-                  <div><img src="https://img.icons8.com/ios-glyphs/24/000000/share.png"/></div>
-               </div>
-            </div>
+            {eventsMapped}
+            
          </div>
          <div className='browse-map'>
             [MAP ON HOVER]
@@ -75,4 +68,15 @@ function BrowseEvents() {
    )
 }
 
-export default BrowseEvents;
+const mapStateToProps = reduxState => {
+   return {
+      userLocation: reduxState.user.userLocation,
+      events: reduxState.events.events
+   }
+};
+
+export default connect(mapStateToProps,
+   {
+      updateEvents
+   }
+)(BrowseEvents);

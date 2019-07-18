@@ -3,7 +3,6 @@ import {Link, withRouter} from 'react-router-dom';
 import firebase from 'firebase'
 import {connect} from 'react-redux';
 import {updateIsSignedIn, updateUserIPLocation} from '../ducks/userReducer';
-import {updateEvents} from '../ducks/eventsReducer';
 
 import {
    Collapse,
@@ -31,11 +30,6 @@ class Header extends Component {
       if (!userLocation.city) updateUserIPLocation()
          
    }
-   componentDidUpdate(prevProps) {
-      if (this.props.userLocation.city && prevProps.userLocation !== this.props.userLocation) {
-         this.props.updateEvents(this.props.userLocation);
-      }
-   }
    toggle(){
       this.setState({
          isOpen: !this.state.isOpen
@@ -53,7 +47,7 @@ class Header extends Component {
       return (
          <header>
             <Navbar color="light" light expand="md">
-               <NavbarBrand href="/">Instaplan {this.props.userLocation.city}, {this.props.userLocation.state}</NavbarBrand>
+               <NavbarBrand href="/">Instaplan | {this.props.userLocation.city}, {this.props.userLocation.state}</NavbarBrand>
                <NavbarToggler onClick={this.toggle} />
                <Collapse isOpen={this.state.isOpen} navbar>
                   <Nav className="ml-auto" navbar>
@@ -99,7 +93,6 @@ const mapStateToProps = reduxState => {
 export default withRouter(connect(mapStateToProps, 
    {
       updateIsSignedIn,
-      updateUserIPLocation,
-      updateEvents
+      updateUserIPLocation
    }
 )(Header));
