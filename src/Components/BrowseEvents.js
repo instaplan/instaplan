@@ -14,7 +14,7 @@ function BrowseEvents(props) {
    }, [userLocation]);
 
    const eventsMapped = events.length > 0 && events.map((event, i) => {
-
+      console.log(event)
       // const startTime = event.start.local.substring(11, 16);
       // const endTime = event.end.local.substring(11, 16);
 
@@ -29,9 +29,11 @@ function BrowseEvents(props) {
                   <h3>{event.name.text}</h3>
                </Link>
                <p>start {event.start.local} / end {event.end.local}</p>
-               <p>LOCATION</p>
+               <div className="location-share">
+                  <p>LOCATION</p>
+                  <img src="https://img.icons8.com/ios-glyphs/24/000000/share.png"/>
+               </div>
             </div>
-            <div><img src="https://img.icons8.com/ios-glyphs/24/000000/share.png"/></div>
          </div>
       );
    })
@@ -39,7 +41,7 @@ function BrowseEvents(props) {
 
    return (
       <section className='browse-events'>
-         <div> 
+         <div className='browse' > 
             <form className='browse-form' >
             <input
                   type='text'
@@ -61,7 +63,6 @@ function BrowseEvents(props) {
             
          </div>
          <div className='browse-map'>
-            [MAP ON HOVER]
             <img src="https://www.isu.edu/media/top-level/page-layouts/maps/campus-map.jpg" alt=""/>
          </div>  
       </section>
