@@ -3,14 +3,14 @@ import firebase from 'firebase'
 import {connect} from 'react-redux';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 import GoogleSuggest from '../Components/CreateEvent';
-import {updateIsSignedIn, updateUserID} from '../ducks/userReducer';
+import {updateIsSignedIn} from '../ducks/userReducer';
 
 import {API_KEY} from '../config/config';
 
 // this.props.updateUserID(firebase.auth().currentUser.uid) //
 
 
-firebase.initializeApp({
+firebase.initializeApp({ 
     apiKey:"AIzaSyAptYBKyKOnx7vUpYLMJNP_LbPrU6yohGs",
     authDomain:"event-finder-68c32.firebaseapp.com"
 })
@@ -78,7 +78,6 @@ const mapStateToProps = reduxState => {
 
 export default connect(mapStateToProps,
   {
-    updateIsSignedIn,
-    updateUserID
+    updateIsSignedIn
   }
 )(Authorization);
