@@ -3,7 +3,7 @@ import firebase from 'firebase'
 import {connect} from 'react-redux';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 import GoogleSuggest from '../Components/CreateEvent';
-import {updateIsSignedIn, updateUserID} from '../ducks/userReducer';
+import {updateIsSignedIn} from '../ducks/userReducer';
 
 import {API_KEY} from '../config/config';
 
@@ -78,7 +78,6 @@ const mapStateToProps = reduxState => {
 
 export default connect(mapStateToProps,
   {
-    updateIsSignedIn,
-    updateUserID
+    updateIsSignedIn
   }
 )(Authorization);

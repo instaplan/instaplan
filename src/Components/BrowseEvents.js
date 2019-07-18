@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import { Button } from 'reactstrap';
 import {connect} from 'react-redux';
 import {updateEvents} from '../ducks/eventsReducer';
+import UsersEventList from './UsersEventList';
 
 function BrowseEvents(props) {
 
@@ -20,6 +21,8 @@ function BrowseEvents(props) {
 
 
       return (
+      <div>
+         
          <div className='event-row' key={i}>
             <div className="event-image">
                <img src={event.logo.original.url} alt='Event' />
@@ -32,6 +35,7 @@ function BrowseEvents(props) {
                <p>LOCATION</p>
             </div>
             <div><img src="https://img.icons8.com/ios-glyphs/24/000000/share.png"/></div>
+         </div>
          </div>
       );
    })
@@ -56,7 +60,7 @@ function BrowseEvents(props) {
                   <Button color="info">Search</Button>{' '}
                 </div>
             </form>
-
+            <UsersEventList />
             {eventsMapped}
             
          </div>
