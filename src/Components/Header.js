@@ -60,18 +60,15 @@ class Header extends Component {
                   {/* <NavItem>
                      <NavLink tag={Link} to='/myevents'>My Events</NavLink>
                   </NavItem> */}
-              
+                  <NavItem><NavLink tag={Link} to='/events/create' onClick = {this.handleSignIn}>Create Event</NavLink></NavItem>
                  {/* conditionally render sign in / sign out */}
                   {!this.props.isSignedIn
-                  ? <NavItem><NavLink tag={Link} to='/events/create' onClick = {this.handleSignIn}>Create Event</NavLink></NavItem>
-                  : (<>
-                     <NavItem>
-                        <NavLink tag={Link} to='/settings'>Settings</NavLink>
-                     </NavItem>
+                  ? null
+                  : (
                      <NavItem>
                         <NavLink tag={Link} to='' onClick={this.handleSignOut}>Sign Out</NavLink>
                      </NavItem>
-                  </>)
+                  )
                
                }
               
