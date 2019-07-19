@@ -3,7 +3,7 @@ import {Switch, Route} from 'react-router-dom';
 import Landing from './Components/Landing';
 import BrowseEvents from './Components/BrowseEvents';
 import ViewEvent from './Components/ViewEvent';
-import CreateEvent from './Components/CreateEvent';
+// import CreateEvent from './Components/CreateEvent';
 import About from './Components/About';
 import Contact from './Components/Contact';
 import NotFound404 from './Components/NotFound404';

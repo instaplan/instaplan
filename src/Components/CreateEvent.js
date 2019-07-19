@@ -67,7 +67,7 @@ class GoogleSuggest extends Component {
 
     handleAddEvent(e) {
         if (e) {
-            e.preventDefault();
+            // e.preventDefault();
         }
 
         const newValues = {
