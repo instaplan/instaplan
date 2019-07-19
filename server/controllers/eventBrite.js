@@ -11,8 +11,7 @@ module.exports = async function(req, res) {
 
    try {
       ebResponse = await Axios
-         .get(`https://www.eventbriteapi.com/v3/events/search?location.address=${city},${state}&expand=venue&page=all`, headers)
-         console.log(ebResponse.data)
+         .get(`https://www.eventbriteapi.com/v3/events/search?location.address=${city}&start_date.keyword=today&expand=venue,category`, headers)
    } catch(err) {
       console.log(err);
       return res.sendStatus(500);
