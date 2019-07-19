@@ -5,6 +5,7 @@ import { API_KEY } from "../config/config"
 import axios from 'axios'
 import {connect} from 'react-redux';
 import firebase from 'firebase'
+import {updateUserId} from '../ducks/userReducer';
 
 const MY_API_KEY = API_KEY // fake
 
@@ -29,7 +30,10 @@ class GoogleSuggest extends Component {
 
     componentDidMount( ) {this.setState({userid: firebase.auth().currentUser.uid})
         
-
+    
+    }
+    componentDidUpdate(prevState){
+        if (prevState.userid !== this.state.userid) this.props.updateUserId(this.state.userid)
     }
     userImgHandler(file) {
         this.setState({
@@ -86,6 +90,8 @@ class GoogleSuggest extends Component {
     }
 
     render() {
+
+        console.log(this.state.userid)
         const { search, value } = this.state
 
         return (
@@ -194,11 +200,9 @@ class GoogleSuggest extends Component {
     }
 }
 
-const mapStateToProps = reduxState => {
-    return {
-        userId: reduxState.user.userId
+export default connect(null,
+    {
+        updateUserId
     }
-}
-
-export default connect(mapStateToProps)(GoogleSuggest)
+)(GoogleSuggest)
 

@@ -57,9 +57,9 @@ class Header extends Component {
                   <NavItem>
                      <NavLink tag={Link} to="/events">Browse Events</NavLink>
                   </NavItem>
-                  <NavItem>
+                  {/* <NavItem>
                      <NavLink tag={Link} to='/myevents'>My Events</NavLink>
-                  </NavItem>
+                  </NavItem> */}
               
                  {/* conditionally render sign in / sign out */}
                   {!this.props.isSignedIn

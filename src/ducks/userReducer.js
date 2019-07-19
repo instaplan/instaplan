@@ -1,11 +1,12 @@
 import Axios from 'axios';
 const initialState = {
    isSignedIn: false,
-   userLocation: {} // hold city and state keys
+   userLocation: {}, // hold city and state keys
+   userId: ''
 }
 const UPDATE_IS_SIGNED_IN = 'UPDATE_IS_SIGNED_IN';
 const UPDATE_USER_IPLOCATION = 'UPDATE_USER_IPLOCATION'
-
+const UPDATE_USER_ID = 'UPDATE_USER_ID';
 
 export function updateIsSignedIn(status) {
    return {
@@ -20,7 +21,12 @@ export function updateUserIPLocation() {
    }
 }
 
-
+export function updateUserId(str) {
+   return {
+      type: UPDATE_USER_ID,
+      payload: str
+   }
+}
 
 
 export default function userReducer(state = initialState, action) {
@@ -36,7 +42,11 @@ export default function userReducer(state = initialState, action) {
             ...state,
             userLocation: {city: payload.city, state: payload.region}
          }
-      
+      case UPDATE_USER_ID:
+         return {
+            ...state,
+            userId: payload
+         }
       default: return state;
    }
 }

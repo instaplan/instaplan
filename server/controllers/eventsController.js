@@ -14,6 +14,8 @@ module.exports = {
     getOne: (req, res, next) => {
       const dbInstance = req.app.get('db');
       const { id } = req.params;
+
+      console.log(id)
   
       dbInstance.read_event(id)
         .then(event => res.status(200).send(event))

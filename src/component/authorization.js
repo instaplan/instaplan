@@ -6,6 +6,7 @@ import GoogleSuggest from '../Components/CreateEvent';
 import {updateIsSignedIn} from '../ducks/userReducer';
 
 import {API_KEY} from '../config/config';
+import MyEvents from '../Components/Myevents';
 
 // this.props.updateUserID(firebase.auth().currentUser.uid) //
 
@@ -57,6 +58,8 @@ class Authorization extends Component {
 
             <div>
                 <GoogleSuggest />
+                <h1>My Events</h1>
+                <MyEvents />
             </div>
           </span>
         ) : (
