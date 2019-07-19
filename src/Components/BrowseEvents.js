@@ -1,52 +1,66 @@
-import React, {useEffect} from 'react';
+import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import { Button } from 'reactstrap';
 import {connect} from 'react-redux';
 import {updateEvents} from '../ducks/eventsReducer';
 import UsersEventList from './UsersEventList';
+// import EventsMarker from '../Components/maps/EventsMarker'
+
+import { withScriptjs, withGoogleMap, GoogleMap} from 'react-google-maps'
+import EventsMarker from '../Components/maps/EventsMarker'
 
 class BrowseEvents extends Component {
-   
-   
    componentDidMount() {
+      console.log('didMOUNTfired')
       const {userLocation, events, updateEvents} = this.props;
-      if (events.length === 0 && !!userLocation) updateEvents(userLocation);
+      if (events.length === 0 && userLocation.city) updateEvents(userLocation);
    }
-   
-   
    componentDidUpdate(prevProps) {
-      const {userLocation} = this.props;
-      if (prevProps.userLocation !== userLocation && !!userLocation) updateEvents(userLocation);
+      console.log('didUPDATEfired')
+      const {userLocation, updateEvents, events} = this.props;
+      if (prevProps.userLocation !== userLocation && userLocation.city || events.length === 0) updateEvents(userLocation);
    }
-   
-   
    render() {
 
       const{events} = this.props;
 
+      //Events
       const eventsMapped = events.length > 0 && events.map((event, i) => {
          return (
             <div className='event-row' key={i}>
                <div className="event-image">
-                  <img src={event.logo.original.url} alt='Event' />
+                  <img src={event.logo !== null 
+                              ? event.logo.url
+                              : 'http://placekitten.com/200'} alt='Event' />
                </div>
                <div className='event-info' >
                   <Link to='/events/1'>
                      <h3>{event.name.text}</h3>
                   </Link>
                   <p>start {event.start.local} / end {event.end.local}</p>
-                  <div className="location-share">
-                  <p>LOCATION: {event.venue.address.localized_address_display}</p>                    
-                  <img src="https://img.icons8.com/ios-glyphs/24/000000/share.png"/>
-                  </div>
+                  <p>LOCATION: {event.venue.address.localized_address_display}</p>
                </div>
+               <div><img src="https://img.icons8.com/ios-glyphs/24/000000/share.png"/></div>
             </div>
          );
       })
 
+      //Google Maps
+      const eventsOnMap = withScriptjs(withGoogleMap((props) => {
+
+         const markers = props.events.map( event => <EventsMarker 
+                        key={event.uid}
+                        event={event}
+                        location={{lat: event.venue.latitude, lng: event.venue.longitude}}
+                        />)
+         
+         
+      }))
+
+
       return (
          <section className='browse-events'>
-            
+            {console.log(events)}
             <div> 
                <form className='browse-form' >
                <input
@@ -60,7 +74,6 @@ class BrowseEvents extends Component {
                         <option value='music'>Music</option>
                         <option value=''>More categories to populate from db</option>
                      </select>
-                     
                      <Button color="info">Search</Button>{' '}
                   </div>
                </form>
