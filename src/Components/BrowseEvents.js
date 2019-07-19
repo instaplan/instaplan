@@ -6,6 +6,8 @@ import {updateEvents} from '../ducks/eventsReducer';
 import UsersEventList from './UsersEventList';
 // import EventsMarker from '../Components/maps/EventsMarker'
 
+
+
 import { withScriptjs, withGoogleMap, GoogleMap} from 'react-google-maps'
 import EventsMarker from '../Components/maps/EventsMarker'
 

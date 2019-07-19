@@ -10,6 +10,7 @@ import NotFound404 from './Components/NotFound404';
 import Authorization from './component/authorization';
 import MyEvents from './Components/Myevents'
 
+
 export default (
    <Switch>
       <Route component={Landing} exact path='/' />

@@ -6,6 +6,7 @@ const path = require('path');
 
 const {AWS_ACCESSKEYID, AWS_SECRETACCESSKEY, AWS_REGION, AWS_BUCKET} = process.env;
 
+
 aws.config.update({
    secretAccessKey: AWS_SECRETACCESSKEY,
    accessKeyId: AWS_ACCESSKEYID,
