@@ -6,6 +6,7 @@ const {EVENTBRITE_TOKEN} = process.env;
 let headers = { headers: { Authorization: `Bearer ${EVENTBRITE_TOKEN}`}}
 
 module.exports = async function(req, res) {
+   console.log(req.body)
    const {city, state} = req.body;
    let ebResponse = '';
 

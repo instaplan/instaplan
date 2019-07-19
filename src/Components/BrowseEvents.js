@@ -20,6 +20,7 @@ class BrowseEvents extends Component {
       const {userLocation, updateEvents, events} = this.props;
       if (prevProps.userLocation !== userLocation && userLocation.city || events.length === 0) updateEvents(userLocation);
    }
+
    render() {
 
       const{events} = this.props;
@@ -60,7 +61,6 @@ class BrowseEvents extends Component {
 
       return (
          <section className='browse-events'>
-            {console.log(events)}
             <div> 
                <form className='browse-form' >
                <input
@@ -83,6 +83,7 @@ class BrowseEvents extends Component {
                
             </div>
             <div className='browse-map'>
+               [MAP ON HOVER]
                <img src="https://www.isu.edu/media/top-level/page-layouts/maps/campus-map.jpg" alt=""/>
             </div>  
          </section>
