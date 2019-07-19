@@ -5,26 +5,25 @@ import {connect} from 'react-redux';
 import {updateEvents} from '../ducks/eventsReducer';
 import UsersEventList from './UsersEventList';
 
-
-
-
 class BrowseEvents extends Component {
    
    
    componentDidMount() {
       const {userLocation, events, updateEvents} = this.props;
-      if (events.length === 0) updateEvents(userLocation);
+      if (events.length === 0 && !!userLocation) updateEvents(userLocation);
    }
    
    
    componentDidUpdate(prevProps) {
       const {userLocation} = this.props;
-      if (prevProps.userLocation !== userLocation) updateEvents(userLocation);
+      if (prevProps.userLocation !== userLocation && !!userLocation) updateEvents(userLocation);
    }
    
    
    render() {
+
       const{events} = this.props;
+
       const eventsMapped = events.length > 0 && events.map((event, i) => {
          return (
             <div className='event-row' key={i}>
@@ -37,13 +36,14 @@ class BrowseEvents extends Component {
                   </Link>
                   <p>start {event.start.local} / end {event.end.local}</p>
                   <div className="location-share">
-                     <p>LOCATION</p>
-                     <img src="https://img.icons8.com/ios-glyphs/24/000000/share.png"/>
+                  <p>LOCATION: {event.venue.address.localized_address_display}</p>                    
+                  <img src="https://img.icons8.com/ios-glyphs/24/000000/share.png"/>
                   </div>
                </div>
             </div>
          );
       })
+
       return (
          <section className='browse-events'>
             
@@ -64,6 +64,7 @@ class BrowseEvents extends Component {
                      <Button color="info">Search</Button>{' '}
                   </div>
                </form>
+
                <UsersEventList />
                {eventsMapped}
                
@@ -75,12 +76,14 @@ class BrowseEvents extends Component {
       )
    }
 }
+
 const mapStateToProps = reduxState => {
    return {
       userLocation: reduxState.user.userLocation,
       events: reduxState.events.events
    }
 };
+
 export default connect(mapStateToProps,
    {
       updateEvents
