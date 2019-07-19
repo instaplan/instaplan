@@ -89,8 +89,8 @@ class GoogleSuggest extends Component {
         const { search, value } = this.state
 
         return (
-            <form action="">
-                <div>
+            <form className='create-form' action="">
+                <div className='create-inputs'>
                     {/* IMAGE */}
                     <img src={this.state.fileUrl} alt='Event' />
                     <span>

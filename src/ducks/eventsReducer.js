@@ -34,6 +34,7 @@ export default function eventsReducer(state = initialState, action) {
    const {type, payload} = action
    switch(type) {
       case `${UPDATE_EVENTS}_FULFILLED`:
+
          return {
             ...state,
             events: payload

@@ -6,14 +6,20 @@ import {updateEvents} from '../ducks/eventsReducer';
 import UsersEventList from './UsersEventList';
 
 class BrowseEvents extends Component {
+   
+   
    componentDidMount() {
       const {userLocation, events, updateEvents} = this.props;
       if (events.length === 0 && !!userLocation) updateEvents(userLocation);
    }
+   
+   
    componentDidUpdate(prevProps) {
       const {userLocation} = this.props;
       if (prevProps.userLocation !== userLocation && !!userLocation) updateEvents(userLocation);
    }
+   
+   
    render() {
 
       const{events} = this.props;
@@ -29,15 +35,18 @@ class BrowseEvents extends Component {
                      <h3>{event.name.text}</h3>
                   </Link>
                   <p>start {event.start.local} / end {event.end.local}</p>
-                  <p>LOCATION: {event.venue.address.localized_address_display}</p>
+                  <div className="location-share">
+                  <p>LOCATION: {event.venue.address.localized_address_display}</p>                    
+                  <img src="https://img.icons8.com/ios-glyphs/24/000000/share.png"/>
+                  </div>
                </div>
-               <div><img src="https://img.icons8.com/ios-glyphs/24/000000/share.png"/></div>
             </div>
          );
       })
 
       return (
          <section className='browse-events'>
+            
             <div> 
                <form className='browse-form' >
                <input
@@ -61,7 +70,6 @@ class BrowseEvents extends Component {
                
             </div>
             <div className='browse-map'>
-               [MAP ON HOVER]
                <img src="https://www.isu.edu/media/top-level/page-layouts/maps/campus-map.jpg" alt=""/>
             </div>  
          </section>
