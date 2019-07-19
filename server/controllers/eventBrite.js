@@ -11,7 +11,7 @@ module.exports = async function(req, res) {
 
    try {
       ebResponse = await Axios
-         .get(`https://www.eventbriteapi.com/v3/events/search?location.address=${city},${state}&expand=venue&page=all`, headers)
+         .get(`https://www.eventbriteapi.com/v3/events/search?location.address=${city},${state}&expand=venue`, headers)
          console.log(ebResponse.data)
    } catch(err) {
       console.log(err);
