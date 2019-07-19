@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {connect} from 'react-redux';
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { Button } from "reactstrap";
@@ -6,8 +7,7 @@ import firebase from 'firebase'
 
 
 
-
-class UsersEventList extends Component {
+class MyEvents extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,12 +18,17 @@ class UsersEventList extends Component {
     this.deleteEvent = this.deleteEvent.bind(this);
   }
 
-  componentDidMount() {
-    axios.get(`/api/events/`).then(response => {
-      this.setState({
-        events: response.data
-      })
-    })
+ 
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.userId !== this.props.userId) {
+        axios.get(`/api/events/${this.props.userId}`).then(response => {
+          this.setState({
+            events: response.data
+          })
+        })
+
+    }
   }
  
 
@@ -35,6 +40,8 @@ class UsersEventList extends Component {
   }
 
   render() {
+     console.log(this.props.userId)
+      
     
     const events = this.state.events.map((events, i) => {
       return (
@@ -72,4 +79,10 @@ class UsersEventList extends Component {
   }
 }
 
-export default UsersEventList;
+const mapStateToProps = reduxState => {
+    return {
+        userId: reduxState.user.userId
+    }
+}
+
+export default connect(mapStateToProps)(MyEvents);

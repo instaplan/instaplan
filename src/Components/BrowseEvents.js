@@ -20,7 +20,6 @@ class BrowseEvents extends Component {
       const {userLocation, updateEvents, events} = this.props;
       if (prevProps.userLocation !== userLocation && userLocation.city || events.length === 0) updateEvents(userLocation);
    }
-
    render() {
 
       const{events} = this.props;
