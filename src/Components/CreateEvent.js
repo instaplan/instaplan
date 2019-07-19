@@ -26,6 +26,7 @@ class GoogleSuggest extends Component {
         this.handleFormDataChange = this.handleFormDataChange.bind(this);
         this.userImgHandler = this.userImgHandler.bind(this);
         this.handleAddEvent = this.handleAddEvent.bind(this);
+        this.handleAddImage = this.handleAddImage.bind(this);
     }
 
     componentDidMount( ) {this.setState({userid: firebase.auth().currentUser.uid})
@@ -64,15 +65,30 @@ class GoogleSuggest extends Component {
     handleStatusUpdate = (status) => {
         console.log(status)
     }
+    handleAddImage(e) {
+        e.preventDefault();
 
-    handleAddEvent(e) {
-        if (e) {
-            // e.preventDefault();
-        }
 
+        const data = new FormData();
+        data.append('image', this.state.fileName, this.state.fileName.name);
+
+        axios
+            .post('/api/events/image', data, {
+                headers: {
+                    'accept': 'application/json',
+                    'Accept-Language': 'en-US,en;q=0.8',
+                    'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
+                }
+            })
+            .then(res => {
+                const {img_aws_key, img_aws_url} = res.data;
+                this.handleAddEvent(img_aws_key, img_aws_url)
+            })
+    }
+    handleAddEvent(img_aws_key, img_aws_url) {
         const newValues = {
-            awskey: 'testkey',
-            awsurl: 'https://placekitten.com/g/200/300',
+            awskey: img_aws_key,
+            awsurl: img_aws_url,
             title: this.state.title,
             date: this.state.date,
             category: this.state.category,
@@ -186,7 +202,7 @@ class GoogleSuggest extends Component {
 
                     {/* FORM BUTTONS */}
                     <div>
-                        <button onClick={this.handleAddEvent} >Submit</button>
+                        <button onClick={this.handleAddImage} >Submit</button>
                         <button>Cancel</button>
                     </div>
                 </div>

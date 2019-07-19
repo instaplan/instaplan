@@ -16,6 +16,7 @@
     "multer-s3": "^2.9.0",
     "nodemailer": "^6.3.0",
     "nodemon": "^1.19.1",
+    "path": "^0.12.7",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-firebaseui": "^3.1.2",

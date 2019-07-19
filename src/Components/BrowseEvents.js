@@ -7,6 +7,8 @@ import UsersEventList from './UsersEventList';
 // import EventsMarker from '../Components/maps/EventsMarker'
 import EventsMap from '../Components/maps/EventsMap'
 
+
+
 import { withScriptjs, withGoogleMap, GoogleMap} from 'react-google-maps'
 import EventsMarker from '../Components/maps/EventsMarker'
 
