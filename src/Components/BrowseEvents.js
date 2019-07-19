@@ -4,6 +4,10 @@ import { Button } from 'reactstrap';
 import {connect} from 'react-redux';
 import {updateEvents} from '../ducks/eventsReducer';
 import UsersEventList from './UsersEventList';
+// import EventsMarker from '../Components/maps/EventsMarker'
+
+import { withScriptjs, withGoogleMap, GoogleMap} from 'react-google-maps'
+import EventsMarker from '../Components/maps/EventsMarker'
 
 class BrowseEvents extends Component {
    componentDidMount() {
@@ -21,6 +25,7 @@ class BrowseEvents extends Component {
 
       const{events} = this.props;
 
+      //Events
       const eventsMapped = events.length > 0 && events.map((event, i) => {
          return (
             <div className='event-row' key={i}>
@@ -41,6 +46,19 @@ class BrowseEvents extends Component {
          );
       })
 
+      //Google Maps
+      const eventsOnMap = withScriptjs(withGoogleMap((props) => {
+
+         const markers = props.events.map( event => <EventsMarker 
+                        key={event.uid}
+                        event={event}
+                        location={{lat: event.venue.latitude, lng: event.venue.longitude}}
+                        />)
+         
+         
+      }))
+
+
       return (
          <section className='browse-events'>
             <div> 
@@ -56,7 +74,6 @@ class BrowseEvents extends Component {
                         <option value='music'>Music</option>
                         <option value=''>More categories to populate from db</option>
                      </select>
-                     
                      <Button color="info">Search</Button>{' '}
                   </div>
                </form>
