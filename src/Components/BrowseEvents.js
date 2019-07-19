@@ -32,7 +32,7 @@ class BrowseEvents extends Component {
       this.setState({userEvents: eventArr})
    }
    render() {
-
+      console.log('hello')
       console.log(this.state.userEvents)
 
       const{events} = this.props;
