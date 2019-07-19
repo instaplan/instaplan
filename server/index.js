@@ -5,7 +5,7 @@ const nodemailer = require('nodemailer');
 const contact = require('./controllers/contact');
 const eventsController = require('./controllers/eventsController')
 const ebEventsController = require('./controllers/eventBrite');
-
+const addImg = require('./controllers/addImg');
 
 const {SERVER_PORT, CONNECTION_STRING, EMAIL_HOST, EMAIL_NAME, EMAIL_PW} = process.env
 
@@ -46,8 +46,10 @@ app.post('/api/contact', contact);
 // eventbrite api call
 app.post('/api/ebevents', ebEventsController);
 
-// Events
+// aws image upload
+app.post('/api/events/image', addImg);
 
+// Events
 app.post('/api/events', eventsController.create);
 app.get('/api/events', eventsController.getAll);
 app.get('/api/events/:id', eventsController.getOne);
