@@ -34,19 +34,6 @@ export default function eventsReducer(state = initialState, action) {
    const {type, payload} = action
    switch(type) {
       case `${UPDATE_EVENTS}_FULFILLED`:
-      // get only today's events
-         // create day for today YYYY-MM-DD
-         const todayDate = new Date().toJSON();
-         const currentDate = Date.parse(`${todayDate.substr(5, 2)}/${todayDate.substr(8, 2)}/${todayDate.substr(0, 4)}`);
-         // format event start and end date for each item and confirm todays date falls in between
-         let todayEvents = payload.filter(event => {
-            const startDate = event.start.local;
-            const endDate = event.end.local;
-            
-            const fromDate = Date.parse(`${startDate.substr(5, 2)}/${startDate.substr(8, 2)}/${startDate.substr(0, 4)}`);
-            const toDate = Date.parse(`${endDate.substr(5, 2)}/${endDate.substr(8, 2)}/${endDate.substr(0, 4)}`);
-            return fromDate <= currentDate && currentDate <= toDate;
-         })
          return {
             ...state,
             events: payload
