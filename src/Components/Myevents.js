@@ -35,7 +35,7 @@ class MyEvents extends Component {
 
   deleteEvent(id) {
     axios.delete(`/api/events/${id}`).then(results => {
-      // console.log(results.data)
+      
       this.setState({ events: results.data });
     }) 
     window.location.reload(true);
