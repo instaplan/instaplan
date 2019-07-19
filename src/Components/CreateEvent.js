@@ -102,7 +102,8 @@ class GoogleSuggest extends Component {
             .post('/api/events', newValues)
             .then(() => {
                 alert('submitted')
-            })
+                 window.location.reload(true);
+            }) 
     }
 
     render() {
