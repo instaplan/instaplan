@@ -58,7 +58,7 @@ class Header extends Component {
                      <NavLink tag={Link} to="/events">Browse Events</NavLink>
                   </NavItem>
                   <NavItem>
-                     {/* <NavLink tag={Link} to='/events/create'>Create Event</NavLink> */}
+                     <NavLink tag={Link} to='/myevents'>My Events</NavLink>
                   </NavItem>
               
                  {/* conditionally render sign in / sign out */}

@@ -1,1 +1,1 @@
-SELECT * FROM events WHERE id = $1;
+SELECT * FROM events WHERE userid = $1;

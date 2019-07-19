@@ -4,22 +4,28 @@ import { Link } from "react-router-dom";
 import { Button } from "reactstrap";
 import firebase from 'firebase'
 
+
+
+
 class UsersEventList extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      events: []
+      events: [],
+      
+    
     };
     this.deleteEvent = this.deleteEvent.bind(this);
   }
 
   componentDidMount() {
-    axios.get("/api/events").then(response => {
+    axios.get(`/api/events/`).then(response => {
       this.setState({
         events: response.data
-      });
-    });
+      })
+    })
   }
+ 
 
   deleteEvent(id) {
     axios.delete(`/api/events/${id}`).then(results => {
@@ -29,6 +35,7 @@ class UsersEventList extends Component {
   }
 
   render() {
+    
     const events = this.state.events.map((events, i) => {
       return (
         <div>
@@ -42,7 +49,15 @@ class UsersEventList extends Component {
               </Link>
               <p>Date {events.date}</p>
               <p>LOCATION {events.location}</p>
-             
+              <Button
+                color="danger"
+                size="sm"
+                onClick={() => {
+                  this.deleteEvent(events.id);
+                }}
+              >
+                Delete
+              </Button>
               
             </div>
             <div>

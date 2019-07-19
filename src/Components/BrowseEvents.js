@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import { Button } from 'reactstrap';
 import {connect} from 'react-redux';
