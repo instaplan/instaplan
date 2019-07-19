@@ -10,6 +10,7 @@ import About from './Components/About';
 import Contact from './Components/Contact';
 import NotFound404 from './Components/NotFound404';
 import Authorization from './component/authorization';
+import MyEvents from './Components/Myevents'
 
 export default (
    <Switch>
@@ -21,6 +22,7 @@ export default (
       <Route component={Settings} path='/settings' />
       <Route component={About} path='/about' />
       <Route component={Contact} path='/contact' />
+      <Route component={MyEvents} path='/myevents' />
       <Route component={NotFound404} />
    </Switch>
 );
