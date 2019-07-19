@@ -68,6 +68,7 @@ class GoogleSuggest extends Component {
     handleAddImage(e) {
         e.preventDefault();
 
+
         const data = new FormData();
         data.append('image', this.state.fileName, this.state.fileName.name);
 
@@ -84,7 +85,6 @@ class GoogleSuggest extends Component {
                 this.handleAddEvent(img_aws_key, img_aws_url)
             })
     }
-
     handleAddEvent(img_aws_key, img_aws_url) {
         const newValues = {
             awskey: img_aws_key,
