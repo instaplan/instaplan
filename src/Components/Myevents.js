@@ -18,25 +18,28 @@ class MyEvents extends Component {
     this.deleteEvent = this.deleteEvent.bind(this);
   }
 
- 
+  componentDidMount() {
+    this.getEvents();
+  }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.userId !== this.props.userId) {
-        axios.get(`/api/events/${this.props.userId}`).then(response => {
-          this.setState({
-            events: response.data
-          })
-        })
-
-    }
+    if (prevProps.userId !== this.props.userId) this.getEvents();
   }
- 
+  getEvents() {
+    axios.get(`/api/events/${this.props.userId}`).then(response => {
+        this.setState({
+          events: response.data
+        })
+      })
+  }
 
   deleteEvent(id) {
     axios.delete(`/api/events/${id}`).then(results => {
       // console.log(results.data)
       this.setState({ events: results.data });
-    });
+    }) 
+    window.location.reload(true);
+    
   }
 
   render() {
