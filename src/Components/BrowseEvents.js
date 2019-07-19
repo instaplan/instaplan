@@ -5,22 +5,35 @@ import {connect} from 'react-redux';
 import {updateEvents} from '../ducks/eventsReducer';
 import UsersEventList from './UsersEventList';
 // import EventsMarker from '../Components/maps/EventsMarker'
+import EventsMap from '../Components/maps/EventsMap'
 
 import { withScriptjs, withGoogleMap, GoogleMap} from 'react-google-maps'
 import EventsMarker from '../Components/maps/EventsMarker'
 
 class BrowseEvents extends Component {
+   constructor(props) {
+      super(props);
+      this.state = {
+         userEvents: []
+      }
+      this.getUserEvents = this.getUserEvents.bind(this)
+   }
    componentDidMount() {
       console.log('didMOUNTfired')
       const {userLocation, events, updateEvents} = this.props;
       if (events.length === 0 && userLocation.city) updateEvents(userLocation);
    }
-   componentDidUpdate(prevProps) {
+   componentDidUpdate(prevProps, prevState) {
       console.log('didUPDATEfired')
       const {userLocation, updateEvents, events} = this.props;
       if (prevProps.userLocation !== userLocation && userLocation.city || events.length === 0) updateEvents(userLocation);
    }
+   getUserEvents(eventArr) {
+      this.setState({userEvents: eventArr})
+   }
    render() {
+      console.log('hello')
+      console.log(this.state.userEvents)
 
       const{events} = this.props;
 
@@ -45,18 +58,6 @@ class BrowseEvents extends Component {
          );
       })
 
-      //Google Maps
-      const eventsOnMap = withScriptjs(withGoogleMap((props) => {
-
-         const markers = props.events.map( event => <EventsMarker 
-                        key={event.uid}
-                        event={event}
-                        location={{lat: event.venue.latitude, lng: event.venue.longitude}}
-                        />)
-         
-         
-      }))
-
 
       return (
          <section className='browse-events'>
@@ -77,14 +78,21 @@ class BrowseEvents extends Component {
                   </div>
                </form>
 
-               <UsersEventList />
+               <UsersEventList getUserEvents={this.getUserEvents} />
                {eventsMapped}
                
             </div>
-            <div className='browse-map'>
-               [MAP ON HOVER]
-               <img src="https://www.isu.edu/media/top-level/page-layouts/maps/campus-map.jpg" alt=""/>
-            </div>  
+            {/* <div className='browse-map'> */}
+               <EventsMap 
+               
+                  events={this.props.events}
+                  googleMapURL={`https://maps.googleapis.com/maps/api/js?key=AIzaSyCGPX51O0IgwslhB7sVp6Y9Wh26Ts2Z9KU&v=3.exp&libraries=geometry,drawing,places`}
+                  loadingElement={<div style={{ height: `100%` }} />}
+                  containerElement={<div style={{height: `600px`, width: `600px`}} />}
+                  mapElement={<div style={{height: `100%`}} />}
+               />
+               {/* <img src="https://www.isu.edu/media/top-level/page-layouts/maps/campus-map.jpg" alt=""/> */}
+            {/* </div>   */}
          </section>
       )
    }

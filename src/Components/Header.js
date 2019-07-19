@@ -65,7 +65,7 @@ class Header extends Component {
                   {!this.props.isSignedIn
                   ? null
                   : (
-                     
+
                      <NavItem>
                         <NavLink tag={Link} to='' onClick={this.handleSignOut}>Sign Out</NavLink>
                      </NavItem>
