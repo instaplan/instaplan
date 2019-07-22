@@ -46,7 +46,7 @@ class Header extends Component {
 
       return (
          <header>
-            <Navbar color="light" light expand="md">
+            <Navbar color="white" light expand="md">
                <NavbarBrand href="/">Instaplan | {this.props.userLocation.city}, {this.props.userLocation.state}</NavbarBrand>
                <NavbarToggler onClick={this.toggle} />
                <Collapse isOpen={this.state.isOpen} navbar>

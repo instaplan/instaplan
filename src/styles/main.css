@@ -181,7 +181,7 @@ figcaption {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  width: 50vw;
+  width: 60vw;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
@@ -205,7 +205,7 @@ figcaption {
 }
 
 .event-image {
-  width: 110px;
+  width: 220px;
 }
 
 .event-image img {
@@ -268,6 +268,34 @@ figcaption {
           align-items: center;
 }
 
+.info-window {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  max-width: 200px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.info-window h1 {
+  font-size: 0.95rem;
+}
+
+.info-window .window-image {
+  width: 150px;
+  height: auto;
+}
+
+.info-window img {
+  max-width: 100%;
+  height: auto;
+}
+
 footer {
   position: absolute;
   bottom: 0;
@@ -326,7 +354,7 @@ footer li {
 }
 
 @media (max-width: 960px) {
-  .browse-map {
+  .the-map {
     display: none;
   }
   .event-row {

@@ -14,7 +14,6 @@ import MyEvents from './Components/Myevents'
 export default (
    <Switch>
       <Route component={Landing} exact path='/' />
-
       <Route component={Authorization} path='/events/create' />
       <Route component={ViewEvent} path='/events/:eventId' />
       <Route component={BrowseEvents} path='/events' />

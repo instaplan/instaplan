@@ -130,6 +130,7 @@ class GoogleSuggest extends Component {
                             document.getElementById('selectedFile').click()}
                         }>Choose</button>
 
+
                     </span>
 
                     </FormGroup>
@@ -252,5 +253,5 @@ export default withRouter(connect(null,
     {
         updateUserId
     }
-)(GoogleSuggest))
 
+)(GoogleSuggest))

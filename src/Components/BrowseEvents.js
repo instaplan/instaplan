@@ -6,6 +6,7 @@ import { updateEvents } from '../ducks/eventsReducer';
 import UsersEventList from './UsersEventList';
 // import EventsMarker from '../Components/maps/EventsMarker'
 import EventsMap from '../Components/maps/EventsMap'
+
 import { withScriptjs, withGoogleMap, GoogleMap } from 'react-google-maps'
 import EventsMarker from '../Components/maps/EventsMarker'
 class BrowseEvents extends Component {
@@ -53,8 +54,10 @@ class BrowseEvents extends Component {
       e.preventDefault();
       const { filterCategories, filterTitles } = this.state;
       if (!filterCategories && !filterTitles) return alert('At least one criteria required to search')
+
       // grab instaplan users events        
       let filteredUserEvents = [...this.state.userEvents];
+
       if (filterCategories) {
          filteredUserEvents = filteredUserEvents.filter(event => {
             return event.category.toLowerCase().includes(filterCategories.toLowerCase());
@@ -65,7 +68,9 @@ class BrowseEvents extends Component {
             return event.title.toLowerCase().includes(filterTitles.toLowerCase());
          })
       }
-      // grab events from eventbrite        
+
+      // grab events from eventbrite		
+
       let filteredEbEvents = [...this.props.events]
       if (filterCategories) {
          filteredEbEvents = filteredEbEvents.filter(event => {
@@ -81,10 +86,12 @@ class BrowseEvents extends Component {
             }
          })
       }
+
       // handle if no results       
       if (filteredUserEvents.length === 0) filteredUserEvents = 'no results';
       if (filteredEbEvents.length === 0) filteredEbEvents = 'no results';
       // set state for filtered events      
+
       this.setState({
          filteredUserEvents,
          filteredEbEvents
@@ -95,6 +102,7 @@ class BrowseEvents extends Component {
       const events = this.state.filteredEbEvents.length > 0
          ?  this.state.filteredEbEvents     
          :  this.props.events
+
       //Events
       const eventsMapped = this.state.filteredEbEvents === 'no results'
          ?  null
@@ -124,46 +132,49 @@ class BrowseEvents extends Component {
                   <input
                      type='text'
                      placeholder='search within name'
+
                      name='filterTitles'        
                      value={this.state.filterTitles}        
                      onChange={this.handleInputChange}
                   />
                   <div className="filter">
                      <select
-                        name='filterCategories'     
-                        value={this.state.filterCategories}     
+                        name='filterCategories'		
+                        value={this.state.filterCategories}		
                         onChange={this.handleInputChange}
                         >
                         <option value='auto'>Auto, Boat, and Air</option>
-                        <option value='business'>Business</option>      
-                        <option value='charity'>Charity and Causes</option>     
-                        <option value='family'>Family and Education</option>        
-                        <option value='fashion'>Fashion</option>        
-                        <option value='media'>Film and Media</option>       
-                        <option value='food'>Food and Drink</option>        
-                        <option value='government'>Government</option>      
-                        <option value='health'>Health</option>      
-                        <option value='hobbies'>Hobbies</option>        
-                        <option value='holiday'>Holiday</option>        
+                        <option value='business'>Business</option>		
+                        <option value='charity'>Charity and Causes</option>		
+                        <option value='family'>Family and Education</option>		
+                        <option value='fashion'>Fashion</option>		
+                        <option value='media'>Film and Media</option>		
+                        <option value='food'>Food and Drink</option>		
+                        <option value='government'>Government</option>		
+                        <option value='health'>Health</option>		
+                        <option value='hobbies'>Hobbies</option>		
+                        <option value='holiday'>Holiday</option>		
                         <option value='lifestyle'>Home and Lifestyle</option>
                         <option value='music'>Music</option>
                         <option value='other'>Other</option>
-                        <option value='performing'>Performing and Visual Arts</option>      
-                        <option value='school'>School Activities</option>       
-                        <option value='tech'>Science and Tech</option>      
-                        <option value='spirituality'>Spirituality</option>      
-                        <option value='sports'>Sports and Fitness</option>      
+                        <option value='performing'>Performing and Visual Arts</option>		
+                        <option value='school'>School Activities</option>		
+                        <option value='tech'>Science and Tech</option>		
+                        <option value='spirituality'>Spirituality</option>		
+                        <option value='sports'>Sports and Fitness</option>		
                         <option value='outdoor'>Travel and Outdoor</option>
                      </select>
                      <Button color="info" onClick={this.clearFilter}>clear</Button>{' '}
                      <Button color="info" onClick={this.filterEvents}>SEARCH</Button>{' '}
                   </div>
                </form>
+
                <UsersEventList
                    getUserEvents={this.getUserEvents}
                    filteredUserEvents={this.state.filteredUserEvents}
                />
                {eventsMapped}
+
             </div>
             {/* <div className='browse-map'> */}
             <EventsMap
