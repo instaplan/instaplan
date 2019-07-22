@@ -26,9 +26,11 @@
     "react-redux": "^7.1.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
+    "react-youtube": "^7.9.0",
     "reactstrap": "^8.0.1",
     "redux": "^4.0.4",
-    "redux-promise-middleware": "^6.1.1"
+    "redux-promise-middleware": "^6.1.1",
+    "video-react": "^0.14.0"
   },
   "scripts": {
     "start": "react-scripts start",
