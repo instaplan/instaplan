@@ -19,12 +19,24 @@ const items = [
      altText: 'Slide 3',
      caption: 'Slide 3',
      header: 'Slide 3 Header'
-   }
+   },
+   {
+      src: 'https://topnotchtalent.com/wp-content/uploads/holiday-party-entertainment-top-notch-talent.jpg',
+      altText: 'Slide 3',
+      caption: 'Slide 3',
+      header: 'Slide 3 Header'
+    },
+    {
+       src: 'https://zone1-ibizaspotlightsl.netdna-ssl.com/sites/default/files/styles/auto_1500_width/public/article-images/132783/slideshow-1545223229.jpg',
+       altText: 'Slide 3',
+       caption: 'Slide 3',
+       header: 'Slide 3 Header'
+     }
  ];
  
 
  
- 
+
  function Landing() {
    
    return (

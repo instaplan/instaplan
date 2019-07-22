@@ -3,9 +3,11 @@ import GoogleMapLoader from "react-google-maps-loader"
 import GooglePlacesSuggest from "react-google-places-suggest"
 import { API_KEY } from "../config/config"
 import axios from 'axios'
+import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import firebase from 'firebase'
 import {updateUserId} from '../ducks/userReducer';
+import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 
 const MY_API_KEY = API_KEY // fake
 
@@ -102,6 +104,7 @@ class GoogleSuggest extends Component {
             .post('/api/events', newValues)
             .then(() => {
                 alert('submitted')
+                this.props.history.push('/events');
             })
     }
 
@@ -111,21 +114,24 @@ class GoogleSuggest extends Component {
         const { search, value } = this.state
 
         return (
-            <form className='create-form' action="">
+            <Form className='create-form' action="">
                 <div className='create-inputs'>
                     {/* IMAGE */}
                     <img src={this.state.fileUrl} alt='Event' />
-                    <span>
-                        <input
+                    <FormGroup>
+                        <Input
                             type='file'
                             id='selectedFile'
                             style={{ display: 'none' }}
                             onChange={e => this.userImgHandler(e.target.files[0])}
                         />
-                        <button onClick={() => document.getElementById('selectedFile').click()}>Choose</button>
-                    </span>
+                        <button onClick={e => {
+                            e.preventDefault();
+                            document.getElementById('selectedFile').click()}
+                        }>Choose</button>
+                    </FormGroup>
                     {/* TITLE */}
-                    <input
+                    <Input
                         placeholder='title'
                         type='text'
                         value={this.state.title}
@@ -133,7 +139,7 @@ class GoogleSuggest extends Component {
                         onChange={this.handleFormDataChange}
                     />
                     {/* DATE */}
-                    <input
+                    <Input
                         type='date'
                         value={this.state.date}
                         name='date'
@@ -168,7 +174,7 @@ class GoogleSuggest extends Component {
                                         </div>
                                     )}
                                 >
-                                    <input
+                                    <Input
                                         type="text"
                                         value={value}
                                         placeholder="Search a location"
@@ -181,7 +187,7 @@ class GoogleSuggest extends Component {
                     {/* // END GOOGLE ADDRESS INPUT */}
 
                     {/* CATEGORY */}
-                    <select
+                    <Input type="select" 
                         value={this.state.category}
                         name='category'
                         onChange={this.handleFormDataChange}
@@ -190,10 +196,10 @@ class GoogleSuggest extends Component {
                         <option value='food'>Food</option>
                         <option value='music'>Music</option>
                         <option value=''>More categories to populate from db</option>
-                    </select>
+                    </Input>
 
                     {/* DESCRIPTION */}
-                    <textarea
+                    <Input type='testarea'
                         placeholder='event description'
                         value={this.state.description}
                         name='description'
@@ -202,11 +208,11 @@ class GoogleSuggest extends Component {
 
                     {/* FORM BUTTONS */}
                     <div>
-                        <button onClick={this.handleAddImage} >Submit</button>
-                        <button>Cancel</button>
+                        <Button onClick={this.handleAddImage} >Submit</Button>
+                        <Button>Cancel</Button>
                     </div>
                 </div>
-            </form>
+            </Form>
 
 
 
@@ -216,9 +222,8 @@ class GoogleSuggest extends Component {
     }
 }
 
-export default connect(null,
+export default withRouter(connect(null,
     {
         updateUserId
     }
-)(GoogleSuggest)
-
+)(GoogleSuggest))
