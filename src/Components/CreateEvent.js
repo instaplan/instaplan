@@ -129,7 +129,11 @@ class GoogleSuggest extends Component {
                             e.preventDefault();
                             document.getElementById('selectedFile').click()}
                         }>Choose</button>
+
+                    </span>
+
                     </FormGroup>
+
                     {/* TITLE */}
                     <Input
                         placeholder='title'
@@ -192,11 +196,33 @@ class GoogleSuggest extends Component {
                         name='category'
                         onChange={this.handleFormDataChange}
                     >
-                        <option value='' disabled selected>category</option>
-                        <option value='food'>Food</option>
+                        <option value='' disabled selected>category:</option>
+                        <option value='auto'>Auto, Boat, and Air</option>
+                        <option value='business'>Business</option>
+                        <option value='charity'>Charity and Causes</option>
+                        <option value='family'>Family and Education</option>
+                        <option value='fashion'>Fashion</option>
+                        <option value='media'>Film and Media</option>
+                        <option value='food'>Food and Drink</option>
+                        <option value='government'>Government</option>
+                        <option value='health'>Health</option>
+                        <option value='hobbies'>Hobbies</option>
+                        <option value='holiday'>Holiday</option>
+                        <option value='lifestyle'>Home and Lifestyle</option>
                         <option value='music'>Music</option>
+
+                        <option value='other'>Other</option>
+                        <option value='performing'>Performing and Visual Arts</option>
+                        <option value='school'>School Activities</option>
+                        <option value='tech'>Science and Tech</option>
+                        <option value='spirituality'>Spirituality</option>
+                        <option value='sports'>Sports and Fitness</option>
+                        <option value='outdoor'>Travel and Outdoor</option>
+                     </select>
+
                         <option value=''>More categories to populate from db</option>
                     </Input>
+
 
                     {/* DESCRIPTION */}
                     <Input type='testarea'
@@ -227,3 +253,4 @@ export default withRouter(connect(null,
         updateUserId
     }
 )(GoogleSuggest))
+
