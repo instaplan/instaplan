@@ -8,7 +8,8 @@ class UsersEventList extends Component {
   constructor() {
     super();
     this.state = {
-      events: []
+      events: [],
+      filteredUserEvents: []
     };
     this.deleteEvent = this.deleteEvent.bind(this);
   }
@@ -18,7 +19,14 @@ class UsersEventList extends Component {
       this.setState({
         events: response.data
       });
+      this.props.getUserEvents(response.data);
     });
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.filteredUserEvents !== this.props.filteredUserEvents) {
+      this.setState({ filteredUserEvents: this.props.filteredUserEvents })
+    }
   }
 
   deleteEvent(id) {
@@ -29,7 +37,10 @@ class UsersEventList extends Component {
   }
 
   render() {
-    const events = this.state.events.map((events, i) => {
+
+    const {filteredUserEvents} = this.state;
+
+    const events = filteredUserEvents === 'no results' ? null : (filteredUserEvents.length > 0 ? filteredUserEvents : this.state.events).map((events, i) => {
       return (
         <div>
           <div className="event-row" key={i}>

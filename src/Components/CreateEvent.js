@@ -3,6 +3,7 @@ import GoogleMapLoader from "react-google-maps-loader"
 import GooglePlacesSuggest from "react-google-places-suggest"
 import { API_KEY } from "../config/config"
 import axios from 'axios'
+import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import firebase from 'firebase'
 import {updateUserId} from '../ducks/userReducer';
@@ -102,6 +103,7 @@ class GoogleSuggest extends Component {
             .post('/api/events', newValues)
             .then(() => {
                 alert('submitted')
+                this.props.history.push('/events');
             })
     }
 
@@ -122,7 +124,10 @@ class GoogleSuggest extends Component {
                             style={{ display: 'none' }}
                             onChange={e => this.userImgHandler(e.target.files[0])}
                         />
-                        <button onClick={() => document.getElementById('selectedFile').click()}>Choose</button>
+                        <button onClick={e => {
+                            e.preventDefault();
+                            document.getElementById('selectedFile').click()}
+                        }>Choose</button>
                     </span>
                     {/* TITLE */}
                     <input
@@ -186,11 +191,28 @@ class GoogleSuggest extends Component {
                         name='category'
                         onChange={this.handleFormDataChange}
                     >
-                        <option value='' disabled selected>category</option>
-                        <option value='food'>Food</option>
+                        <option value='' disabled selected>category:</option>
+                        <option value='auto'>Auto, Boat, and Air</option>
+                        <option value='business'>Business</option>
+                        <option value='charity'>Charity and Causes</option>
+                        <option value='family'>Family and Education</option>
+                        <option value='fashion'>Fashion</option>
+                        <option value='media'>Film and Media</option>
+                        <option value='food'>Food and Drink</option>
+                        <option value='government'>Government</option>
+                        <option value='health'>Health</option>
+                        <option value='hobbies'>Hobbies</option>
+                        <option value='holiday'>Holiday</option>
+                        <option value='lifestyle'>Home and Lifestyle</option>
                         <option value='music'>Music</option>
-                        <option value=''>More categories to populate from db</option>
-                    </select>
+                        <option value='other'>Other</option>
+                        <option value='performing'>Performing and Visual Arts</option>
+                        <option value='school'>School Activities</option>
+                        <option value='tech'>Science and Tech</option>
+                        <option value='spirituality'>Spirituality</option>
+                        <option value='sports'>Sports and Fitness</option>
+                        <option value='outdoor'>Travel and Outdoor</option>
+                     </select>
 
                     {/* DESCRIPTION */}
                     <textarea
@@ -216,9 +238,9 @@ class GoogleSuggest extends Component {
     }
 }
 
-export default connect(null,
+export default withRouter(connect(null,
     {
         updateUserId
     }
-)(GoogleSuggest)
+)(GoogleSuggest))
 
