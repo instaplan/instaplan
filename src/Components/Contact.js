@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import Axios from 'axios';
+import "../styles/Contact.css"
 
 function Contact(props) {
 
@@ -38,7 +39,7 @@ function Contact(props) {
    }
 
    return (
-      <section>
+      <section className="main-block">
          <h1>Contact</h1>
 
          <div>
@@ -71,6 +72,9 @@ function Contact(props) {
                   <button type='submit'>Submit</button>
                </span>
             </form>  
+         </div>
+         <div>
+            
          </div>
       </section>
    )
