@@ -234,6 +234,14 @@ figcaption {
   height: 300px;
   width: 300px;
 }
+.aboutUs {
+  background-image: url("https://bme.udel.edu/wp-content/uploads/2016/08/blue-teal-gradient-background.jpg");
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  position: relative;
+  font-size: 40px
+}
 
 .create-form {
   display: -webkit-box;

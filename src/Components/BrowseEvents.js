@@ -7,11 +7,8 @@ import UsersEventList from './UsersEventList';
 // import EventsMarker from '../Components/maps/EventsMarker'
 import EventsMap from '../Components/maps/EventsMap'
 
-
-
 import { withScriptjs, withGoogleMap, GoogleMap } from 'react-google-maps'
 import EventsMarker from '../Components/maps/EventsMarker'
-
 class BrowseEvents extends Component {
    constructor(props) {
       super(props);
@@ -57,7 +54,8 @@ class BrowseEvents extends Component {
       e.preventDefault();
       const { filterCategories, filterTitles } = this.state;
       if (!filterCategories && !filterTitles) return alert('At least one criteria required to search')
-      // grab instaplan users events		
+
+      // grab instaplan users events        
       let filteredUserEvents = [...this.state.userEvents];
 
       if (filterCategories) {
@@ -70,7 +68,9 @@ class BrowseEvents extends Component {
             return event.title.toLowerCase().includes(filterTitles.toLowerCase());
          })
       }
+
       // grab events from eventbrite		
+
       let filteredEbEvents = [...this.props.events]
       if (filterCategories) {
          filteredEbEvents = filteredEbEvents.filter(event => {
@@ -86,10 +86,12 @@ class BrowseEvents extends Component {
             }
          })
       }
-      // handle if no results		
+
+      // handle if no results       
       if (filteredUserEvents.length === 0) filteredUserEvents = 'no results';
       if (filteredEbEvents.length === 0) filteredEbEvents = 'no results';
-      // set state for filtered events		
+      // set state for filtered events      
+
       this.setState({
          filteredUserEvents,
          filteredEbEvents
@@ -97,9 +99,8 @@ class BrowseEvents extends Component {
    }
    render() {
     
-
       const events = this.state.filteredEbEvents.length > 0
-         ?  this.state.filteredEbEvents		
+         ?  this.state.filteredEbEvents     
          :  this.props.events
 
       //Events
@@ -124,8 +125,6 @@ class BrowseEvents extends Component {
             </div>
          );
       })
-
-
       return (
          <section className='browse-events'>
             <div>
@@ -133,8 +132,9 @@ class BrowseEvents extends Component {
                   <input
                      type='text'
                      placeholder='search within name'
-                     name='filterTitles'		
-                     value={this.state.filterTitles}		
+
+                     name='filterTitles'        
+                     value={this.state.filterTitles}        
                      onChange={this.handleInputChange}
                   />
                   <div className="filter">
@@ -178,7 +178,6 @@ class BrowseEvents extends Component {
             </div>
             {/* <div className='browse-map'> */}
             <EventsMap
-
                events={this.props.events}
                googleMapURL={`https://maps.googleapis.com/maps/api/js?key=AIzaSyCGPX51O0IgwslhB7sVp6Y9Wh26Ts2Z9KU&v=3.exp&libraries=geometry,drawing,places`}
                loadingElement={<div className='the-map' style={{ height: `100%` }} />}
@@ -191,14 +190,12 @@ class BrowseEvents extends Component {
       )
    }
 }
-
 const mapStateToProps = reduxState => {
    return {
       userLocation: reduxState.user.userLocation,
       events: reduxState.events.events
    }
 };
-
 export default connect(mapStateToProps,
    {
       updateEvents

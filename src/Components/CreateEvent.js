@@ -7,6 +7,7 @@ import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import firebase from 'firebase'
 import {updateUserId} from '../ducks/userReducer';
+import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 
 const MY_API_KEY = API_KEY // fake
 
@@ -113,12 +114,12 @@ class GoogleSuggest extends Component {
         const { search, value } = this.state
 
         return (
-            <form className='create-form' action="">
+            <Form className='create-form' action="">
                 <div className='create-inputs'>
                     {/* IMAGE */}
                     <img src={this.state.fileUrl} alt='Event' />
-                    <span>
-                        <input
+                    <FormGroup>
+                        <Input
                             type='file'
                             id='selectedFile'
                             style={{ display: 'none' }}
@@ -128,9 +129,14 @@ class GoogleSuggest extends Component {
                             e.preventDefault();
                             document.getElementById('selectedFile').click()}
                         }>Choose</button>
+
+
                     </span>
+
+                    </FormGroup>
+
                     {/* TITLE */}
-                    <input
+                    <Input
                         placeholder='title'
                         type='text'
                         value={this.state.title}
@@ -138,7 +144,7 @@ class GoogleSuggest extends Component {
                         onChange={this.handleFormDataChange}
                     />
                     {/* DATE */}
-                    <input
+                    <Input
                         type='date'
                         value={this.state.date}
                         name='date'
@@ -173,7 +179,7 @@ class GoogleSuggest extends Component {
                                         </div>
                                     )}
                                 >
-                                    <input
+                                    <Input
                                         type="text"
                                         value={value}
                                         placeholder="Search a location"
@@ -186,19 +192,41 @@ class GoogleSuggest extends Component {
                     {/* // END GOOGLE ADDRESS INPUT */}
 
                     {/* CATEGORY */}
-                    <select
+                    <Input type="select" 
                         value={this.state.category}
                         name='category'
                         onChange={this.handleFormDataChange}
                     >
-                        <option value='' disabled selected>category</option>
-                        <option value='food'>Food</option>
+                        <option value='' disabled selected>category:</option>
+                        <option value='auto'>Auto, Boat, and Air</option>
+                        <option value='business'>Business</option>
+                        <option value='charity'>Charity and Causes</option>
+                        <option value='family'>Family and Education</option>
+                        <option value='fashion'>Fashion</option>
+                        <option value='media'>Film and Media</option>
+                        <option value='food'>Food and Drink</option>
+                        <option value='government'>Government</option>
+                        <option value='health'>Health</option>
+                        <option value='hobbies'>Hobbies</option>
+                        <option value='holiday'>Holiday</option>
+                        <option value='lifestyle'>Home and Lifestyle</option>
                         <option value='music'>Music</option>
+
+                        <option value='other'>Other</option>
+                        <option value='performing'>Performing and Visual Arts</option>
+                        <option value='school'>School Activities</option>
+                        <option value='tech'>Science and Tech</option>
+                        <option value='spirituality'>Spirituality</option>
+                        <option value='sports'>Sports and Fitness</option>
+                        <option value='outdoor'>Travel and Outdoor</option>
+                     </select>
+
                         <option value=''>More categories to populate from db</option>
-                    </select>
+                    </Input>
+
 
                     {/* DESCRIPTION */}
-                    <textarea
+                    <Input type='testarea'
                         placeholder='event description'
                         value={this.state.description}
                         name='description'
@@ -207,11 +235,11 @@ class GoogleSuggest extends Component {
 
                     {/* FORM BUTTONS */}
                     <div>
-                        <button onClick={this.handleAddImage} >Submit</button>
-                        <button>Cancel</button>
+                        <Button onClick={this.handleAddImage} >Submit</Button>
+                        <Button>Cancel</Button>
                     </div>
                 </div>
-            </form>
+            </Form>
 
 
 
@@ -225,4 +253,5 @@ export default withRouter(connect(null,
     {
         updateUserId
     }
+
 )(GoogleSuggest))
