@@ -3,6 +3,7 @@ import GoogleMapLoader from "react-google-maps-loader"
 import GooglePlacesSuggest from "react-google-places-suggest"
 import { API_KEY } from "../config/config"
 import axios from 'axios'
+import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import firebase from 'firebase'
 import {updateUserId} from '../ducks/userReducer';
@@ -102,6 +103,7 @@ class GoogleSuggest extends Component {
             .post('/api/events', newValues)
             .then(() => {
                 alert('submitted')
+                this.props.history.push('/events');
             })
     }
 
@@ -122,7 +124,10 @@ class GoogleSuggest extends Component {
                             style={{ display: 'none' }}
                             onChange={e => this.userImgHandler(e.target.files[0])}
                         />
-                        <button onClick={() => document.getElementById('selectedFile').click()}>Choose</button>
+                        <button onClick={e => {
+                            e.preventDefault();
+                            document.getElementById('selectedFile').click()}
+                        }>Choose</button>
                     </span>
                     {/* TITLE */}
                     <input
@@ -216,9 +221,8 @@ class GoogleSuggest extends Component {
     }
 }
 
-export default connect(null,
+export default withRouter(connect(null,
     {
         updateUserId
     }
-)(GoogleSuggest)
-
+)(GoogleSuggest))
