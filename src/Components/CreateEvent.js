@@ -130,9 +130,6 @@ class GoogleSuggest extends Component {
                             document.getElementById('selectedFile').click()}
                         }>Choose</button>
 
-
-                    </span>
-
                     </FormGroup>
 
                     {/* TITLE */}
@@ -219,8 +216,6 @@ class GoogleSuggest extends Component {
                         <option value='spirituality'>Spirituality</option>
                         <option value='sports'>Sports and Fitness</option>
                         <option value='outdoor'>Travel and Outdoor</option>
-                     </select>
-
                         <option value=''>More categories to populate from db</option>
                     </Input>
 

@@ -1,24 +1,26 @@
 import React from 'react';
 
 // need to code around design
+// fix refresh issue
+// add in code for user added events
 
-function ViewEvent() {
+function ViewEvent(props) {
+
+   const {title, organizer, description, startTime, date, endTime, img, address, type} = props.location.state;
+
    return (
       <article>
          <div>
-            <img src='http://placekitten.com/200/200' alt='Event' />
-            <p>[DESC] This is the description of the event and will show all of the description provided by the db or API.</p>
-            <div>📨[SHARE ICON]</div>
+            <img src={img} alt='Event' />
+            <p>{description}</p>
+            {type === 'eventbrite' ? <div>📨[SHARE ICON]</div> : null}
          </div>
          <div>
-            <h1>[TITLE]</h1>
-            <h4>by [USERNAME]</h4>
-            <p>[DISTANCE] from you</p>
-            <time datetime='2019-01-01'>[TIME and DATE]</time>
-            <p>[ADDRESS]</p>
-         </div>
-         <div>
-            [MAP]
+            <h1>{title}</h1>
+            <h4>by {organizer}</h4>
+            <p>{startTime ? `Start: ${startTime}` : `Date: ${date}`}</p>
+            <p>{endTime ? `End: ${endTime}` : null}</p>
+            <p>{address}</p>
          </div>
       </article>
    )

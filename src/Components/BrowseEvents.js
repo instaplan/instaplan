@@ -114,8 +114,22 @@ class BrowseEvents extends Component {
                      ? event.logo.url
                      : 'http://placekitten.com/200'} alt='Event' />
                </div>
-               <div className='event-info' >
-                  <Link to='/events/1'>
+               <div className='event-info'>
+                  <Link to={{
+                     pathname: '/events/view',
+                     state: {
+                        title: event.name.text,
+                        organizer: !event.organizer.description.text ? 'Unknown Organizer' : event.organizer.description.text,
+                        description: event.description.text,
+                        startTime: event.start.local,
+                        endTime: event.end.local,
+                        img: event.logo !== null
+                           ? event.logo.url
+                           : 'http://placekitten.com/200',
+                        address: event.venue.address.localized_address_display,
+                        type: 'eventbrite'
+                     }
+                  }}>
                      <h3>{event.name.text}</h3>
                   </Link>
                   <p>start {event.start.local} / end {event.end.local}</p>
@@ -128,7 +142,7 @@ class BrowseEvents extends Component {
       return (
          <section className='browse-events'>
             <div>
-               <form className='browse-form' >
+               <form className='browse-form' onSubmit={this.filterEvents}>
                   <input
                      type='text'
                      placeholder='search within name'
@@ -165,7 +179,7 @@ class BrowseEvents extends Component {
                         <option value='outdoor'>Travel and Outdoor</option>
                      </select>
                      <Button color="info" onClick={this.clearFilter}>clear</Button>{' '}
-                     <Button color="info" onClick={this.filterEvents}>SEARCH</Button>{' '}
+                     <Button color="info" type='submit'>SEARCH</Button>{' '}
                   </div>
                </form>
 
