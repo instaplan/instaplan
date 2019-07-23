@@ -48,8 +48,7 @@ class Authorization extends Component {
     <div className="App">
            {this.props.isSignedIn ? (
           <span>
-            <div>Signed In!</div>
-            {/* <button onClick={() => firebase.auth().signOut()}>Sign out!</button> */}
+           
             <h1>Welcome {firebase.auth().currentUser.displayName}</h1>
 
 

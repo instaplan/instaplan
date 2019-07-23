@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Input } from 'reactstrap';
+import { Button, Input, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { connect } from 'react-redux';
 import { updateEvents } from '../ducks/eventsReducer';
 import UsersEventList from './UsersEventList';
 import EventsMap from '../Components/maps/EventsMap'
+import {FacebookShareButton, TwitterShareButton, EmailShareButton,WhatsappShareButton, FacebookIcon, TwitterIcon, EmailIcon, WhatsappIcon} from 'react-share'
+import '../styles/modal.css'
+
 
 
 
@@ -20,18 +23,17 @@ class BrowseEvents extends Component {
          filterCategories: '',
          filterTitles: '',
          filteredUserEvents: [],
-         filteredEbEvents: []
+         filteredEbEvents: [],
+         openedModal: null
+        
       }
       this.getUserEvents = this.getUserEvents.bind(this)
       this.handleInputChange = this.handleInputChange.bind(this)
       this.clearFilter = this.clearFilter.bind(this)
       this.filterEvents = this.filterEvents.bind(this)
+
    }
-   componentDidMount() {
-      console.log('didMOUNTfired')
-      const { userLocation, events, updateEvents } = this.props;
-      if (events.length === 0 && userLocation.city) updateEvents(userLocation);
-   }
+  
    componentDidUpdate(prevProps, prevState) {
       console.log('didUPDATEfired')
       const { userLocation, updateEvents, events } = this.props;
@@ -41,6 +43,13 @@ class BrowseEvents extends Component {
       const { name, value } = e.target;
       this.setState({ [name]: value });
    }
+   openModal = id => {
+      this.setState({ openedModal: id });
+    };
+    closeModal = () => {
+      this.setState({ openedModal: null });
+    };
+  
    getUserEvents(eventArr) {
       this.setState({ userEvents: eventArr })
    }
@@ -140,7 +149,46 @@ class BrowseEvents extends Component {
                   <p>start {event.start.local} / end {event.end.local}</p>
                   <p>LOCATION: {event.venue.address.localized_address_display}</p>
                </div>
-               <div><img src="https://img.icons8.com/ios-glyphs/24/000000/share.png" /></div>
+               
+               <div> <Button color="white" onClick={() => this.openModal(event.id)}><img src="https://img.icons8.com/ios-glyphs/24/000000/share.png" /></Button>
+        <Modal isOpen={this.state.openedModal === event.id} toggle={this.closeModal} className={this.props.className}>
+          <ModalHeader >{event.name.text}</ModalHeader>
+          <ModalBody className ="modalbody">
+            <FacebookShareButton 
+            url={event.url}
+            title={event.name.text}>
+            <FacebookIcon
+            size ={45}
+            round />
+            </FacebookShareButton>
+            <TwitterShareButton 
+            url={event.url}
+            title={event.name.text}>
+            <TwitterIcon
+            size ={45}
+            round />
+            </TwitterShareButton>
+            <EmailShareButton 
+            url={event.url}
+            title={event.name.text}>
+            <EmailIcon
+            size ={45}
+            round />
+            </EmailShareButton>
+            <WhatsappShareButton 
+            url={event.url}
+            title={event.name.text}>
+            <WhatsappIcon
+            size ={45}
+            round />
+            </WhatsappShareButton>
+            
+          </ModalBody>
+          <ModalFooter>
+            {' '}
+            <Button color="secondary" onClick={this.closeModal}>Cancel</Button>
+          </ModalFooter>
+        </Modal></div>
                
             </div>
          );

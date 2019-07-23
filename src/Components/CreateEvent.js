@@ -138,15 +138,9 @@ class GoogleSuggest extends Component {
 
 
                         </FormGroup>
-
+                        
                         {/* TITLE */}
-                        <Input
-                            placeholder='title'
-                            type='text'
-                            value={this.state.title}
-                            name='title'
-                            onChange={this.handleFormDataChange}
-                        />
+                       
                         {/* DATE */}
                         <Input
                             type='date'
@@ -155,12 +149,8 @@ class GoogleSuggest extends Component {
                             onChange={this.handleFormDataChange}
                         />
 
-                        <button onClick={e => {
-                            e.preventDefault();
-                            document.getElementById('selectedFile').click()}
-                        }>Choose</button>
 
-                    </FormGroup>
+                    
 
                     {/* TITLE */}
                     <Input
@@ -170,13 +160,8 @@ class GoogleSuggest extends Component {
                         name='title'
                         onChange={this.handleFormDataChange}
                     />
-                    {/* DATE */}
-                    <Input
-                        type='date'
-                        value={this.state.date}
-                        name='date'
-                        onChange={this.handleFormDataChange}
-                    />
+                   
+                  
 
                     {/* // BEGIN GOOGLE ADDRESS INPUT */}
                     <GoogleMapLoader
@@ -264,6 +249,7 @@ class GoogleSuggest extends Component {
                         <Button onClick={this.handleAddImage} >Submit</Button>
                         <Button>Cancel</Button>
 
+                    </div>
                     </div>
                 </Form>
             </div>
