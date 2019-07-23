@@ -27,11 +27,7 @@ class BrowseEvents extends Component {
       this.clearFilter = this.clearFilter.bind(this)
       this.filterEvents = this.filterEvents.bind(this)
    }
-   componentDidMount() {
-      console.log('didMOUNTfired')
-      const { userLocation, events, updateEvents } = this.props;
-      if (events.length === 0 && userLocation.city) updateEvents(userLocation);
-   }
+
    componentDidUpdate(prevProps, prevState) {
       console.log('didUPDATEfired')
       const { userLocation, updateEvents, events } = this.props;
