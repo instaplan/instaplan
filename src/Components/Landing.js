@@ -1,84 +1,75 @@
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import { UncontrolledCarousel } from 'reactstrap';
-const items = [
-   {
-     src: 'https://images.unsplash.com/photo-1506157786151-b8491531f063?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80',
-     altText: 'Slide 1',
-     caption: 'Slide 1',
-     header: 'Slide 1 Header'
-   },
-   {
-     src: 'https://images.unsplash.com/photo-1527261834078-9b37d35a4a32?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80',
-     altText: 'Slide 2',
-     caption: 'Slide 2',
-     header: 'Slide 2 Header'
-   },
-   {
-     src: 'https://images.unsplash.com/photo-1527751171053-6ac5ec50000b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80',
-     altText: 'Slide 3',
-     caption: 'Slide 3',
-     header: 'Slide 3 Header'
-   },
-   {
-      src: 'https://topnotchtalent.com/wp-content/uploads/holiday-party-entertainment-top-notch-talent.jpg',
-      altText: 'Slide 3',
-      caption: 'Slide 3',
-      header: 'Slide 3 Header'
-    },
-    {
-       src: 'https://zone1-ibizaspotlightsl.netdna-ssl.com/sites/default/files/styles/auto_1500_width/public/article-images/132783/slideshow-1545223229.jpg',
-       altText: 'Slide 3',
-       caption: 'Slide 3',
-       header: 'Slide 3 Header'
-     }
- ];
- 
+import {connect} from 'react-redux';
 
- 
+function Landing(props) {
 
- function Landing() {
+   const {events} = props;
+
+   // 'carousel' item count (alter slice)
+   const carouselItems =  events.length > 0 && events.slice(0, 3).map(event => {
+      return (
+         {
+            src: event.logo !== null ? event.logo.url : 'http://placekitten.com/200',
+            altText: 'Featured',
+            caption: `By ${!event.organizer.description.text ? 'Unknown Organizer' : event.organizer.description.text}`,
+            header: event.name.text
+         }
+      );
+   });
+
+   // 'featured items' item count (alter slice)
+   const featuredEvents = events.length > 0 && events.slice(0, 4).map(event => {
+      return (
+         <article>
+            <figure>
+               <img src={event.logo !== null ? event.logo.url : 'http://placekitten.com/200'} alt='Featured Event' />
+               <figcaption>{`${event.name.text.substring(0, 30)}...`}</figcaption>
+            </figure>
+            <p>Start: {event.start.local} / End: {event.end.local}</p>
+            <p>{event.venue.address.localized_address_display}</p>
+            <p>{event.description.text.substring(0, 100)}<Link to={{
+               pathname: '/events/view',
+               state: {
+                  title: event.name.text,
+                  organizer: !event.organizer.description.text ? 'Unknown Organizer' : event.organizer.description.text,
+                  description: event.description.text,
+                  startTime: event.start.local,
+                  endTime: event.end.local,
+                  img: event.logo !== null
+                     ? event.logo.url
+                     : 'http://placekitten.com/200',
+                  address: event.venue.address.localized_address_display,
+                  type: 'eventbrite'
+               }}}>...more</Link>
+            </p>
+         </article>
+      );
+   });
    
    return (
       
       <section>
-         <UncontrolledCarousel items={items} />
+         {carouselItems.length > 0 ? <UncontrolledCarousel items={carouselItems} /> : <UncontrolledCarousel items={[{src: 'https://i.ibb.co/Dkh7xss/ezgif-com-crop.gif'}]}/>}
 
          
          <h2 className='landing-header'>Featured Events</h2>
          <section className='landing'>
-            <article>
-               <figure>
-                  <img src='https://cdn.dribbble.com/users/56953/screenshots/6103123/thrive_conference_2019_v2.jpg' alt='Event' />
-                  <figcaption>[EVENT NAME]</figcaption>
-               </figure>
-               <time className='time' dateTime='2019-01-01'>Tue, Jul 16, 9:00am</time>
-               <p>[CITY], [STATE] - [DESC] This is the description of the event and will show a SUMMARY with the<Link to='/events/1'>...(more)</Link></p> 
-            </article>
 
-            <article>
-               <figure>
-                  <img src='https://cdn.dribbble.com/users/854143/screenshots/6510684/stack.jpg' alt='Event' />
-                  <figcaption>[EVENT NAME]</figcaption>
-               </figure>
-               <time dateTime='2019-01-01'>[TIME and DATE]</time>
-               <p>[CITY], [STATE] - This is the description of the event and will show a SUMMARY with the<Link to='/events/2'>...(more)</Link></p> 
-            </article>
-
-            <article>
-               <figure>
-                  <img src='https://cdn.dribbble.com/users/15139/screenshots/6655919/splash_screen-_ipad_landscape_2x_4x.png' alt='Event' />
-                  <figcaption>[EVENT NAME]</figcaption>
-               </figure>
-               <time dateTime='2019-01-01'>[TIME and DATE]</time>
-               <p>[CITY], [STATE] - This is the description of the event and will show a SUMMARY with the<Link to='/events/3'>...(more)</Link></p> 
-            </article>
-            
-
+            {featuredEvents}
+         
             <p><Link to='/events'>Browse More</Link></p>
+
          </section>
       </section>
    )
 }
 
-export default Landing;
+const mapStateToProps = reduxState => {
+   return {
+      events: reduxState.events.events
+   }
+}
+
+export default connect(mapStateToProps)(Landing);

@@ -8,9 +8,7 @@ import { connect } from 'react-redux';
 import firebase from 'firebase'
 import { updateUserId } from '../ducks/userReducer';
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-
 const MY_API_KEY = API_KEY // fake
-
 class GoogleSuggest extends Component {
     constructor(props) {
         super(props);
@@ -30,11 +28,8 @@ class GoogleSuggest extends Component {
         this.handleAddEvent = this.handleAddEvent.bind(this);
         this.handleAddImage = this.handleAddImage.bind(this);
     }
-
     componentDidMount() {
         this.setState({ userid: firebase.auth().currentUser.uid })
-
-
     }
     componentDidUpdate(prevState) {
         if (prevState.userid !== this.state.userid) this.props.updateUserId(this.state.userid)
@@ -45,36 +40,28 @@ class GoogleSuggest extends Component {
             fileUrl: URL.createObjectURL(file)
         });
     }
-
     handleLocationChange = e => {
         this.setState({ search: e.target.value, value: e.target.value })
     }
-
     handleFormDataChange(e) {
         const { name, value } = e.target;
         this.setState({ [name]: value })
     }
-
     handleSelectSuggest = (geocodedPrediction, originalPrediction) => {
         console.log(geocodedPrediction, originalPrediction) // eslint-disable-line
         this.setState({ search: "", value: geocodedPrediction.formatted_address })
         console.log(this.state.value)
     }
-
     handleNoResult = () => {
         console.log('No results for ', this.state.search)
     }
-
     handleStatusUpdate = (status) => {
         console.log(status)
     }
     handleAddImage(e) {
         e.preventDefault();
-
-
         const data = new FormData();
         data.append('image', this.state.fileName, this.state.fileName.name);
-
         axios
             .post('/api/events/image', data, {
                 headers: {
@@ -98,9 +85,7 @@ class GoogleSuggest extends Component {
             description: this.state.description,
             value: this.state.value,
             userid: this.state.userid
-
         }
-
         axios
             .post('/api/events', newValues)
             .then(() => {
@@ -108,12 +93,9 @@ class GoogleSuggest extends Component {
                 this.props.history.push('/events');
             })
     }
-
     render() {
-
         console.log(this.state.userid)
         const { search, value } = this.state
-
         return (
             <div className="form">
                 <Form className='create-form' action="">
@@ -134,9 +116,6 @@ class GoogleSuggest extends Component {
                                 }
                                 }>Choose</button>
                             </div>
-
-
-
                         </FormGroup>
                         
                         {/* TITLE */}
@@ -149,9 +128,6 @@ class GoogleSuggest extends Component {
                             onChange={this.handleFormDataChange}
                         />
 
-
-                    
-
                     {/* TITLE */}
                     <Input
                         placeholder='title'
@@ -162,7 +138,6 @@ class GoogleSuggest extends Component {
                     />
                    
                   
-
                     {/* // BEGIN GOOGLE ADDRESS INPUT */}
                     <GoogleMapLoader
                         params={{
@@ -202,7 +177,6 @@ class GoogleSuggest extends Component {
                         }
                     />
                     {/* // END GOOGLE ADDRESS INPUT */}
-
                     {/* CATEGORY */}
                     <Input type="select" 
                         value={this.state.category}
@@ -223,7 +197,6 @@ class GoogleSuggest extends Component {
                         <option value='holiday'>Holiday</option>
                         <option value='lifestyle'>Home and Lifestyle</option>
                         <option value='music'>Music</option>
-
                         <option value='other'>Other</option>
                         <option value='performing'>Performing and Visual Arts</option>
                         <option value='school'>School Activities</option>
@@ -231,11 +204,8 @@ class GoogleSuggest extends Component {
                         <option value='spirituality'>Spirituality</option>
                         <option value='sports'>Sports and Fitness</option>
                         <option value='outdoor'>Travel and Outdoor</option>
-
                         <option value=''>More categories to populate from db</option>
                     </Input>
-
-
                     {/* DESCRIPTION */}
                     <Input type='testarea'
                         placeholder='event description'
@@ -243,28 +213,20 @@ class GoogleSuggest extends Component {
                         name='description'
                         onChange={this.handleFormDataChange}
                     />
-
                     {/* FORM BUTTONS */}
                     <div>
                         <Button onClick={this.handleAddImage} >Submit</Button>
                         <Button>Cancel</Button>
-
+                    </div>
                     </div>
                     </div>
                 </Form>
             </div>
-
-
-
-
-
         )
     }
 }
-
 export default withRouter(connect(null,
     {
         updateUserId
     }
-
 )(GoogleSuggest))

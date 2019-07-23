@@ -48,7 +48,7 @@ class Authorization extends Component {
     <div className="App">
            {this.props.isSignedIn ? (
           <span>
-           
+
             <h1>Welcome {firebase.auth().currentUser.displayName}</h1>
 
 

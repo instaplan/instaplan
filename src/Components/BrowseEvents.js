@@ -33,7 +33,7 @@ class BrowseEvents extends Component {
       this.filterEvents = this.filterEvents.bind(this)
 
    }
-  
+
    componentDidUpdate(prevProps, prevState) {
       console.log('didUPDATEfired')
       const { userLocation, updateEvents, events } = this.props;
