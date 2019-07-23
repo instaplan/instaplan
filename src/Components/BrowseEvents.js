@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from 'reactstrap';
+import { Button, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 import { updateEvents } from '../ducks/eventsReducer';
 import UsersEventList from './UsersEventList';
 // import EventsMarker from '../Components/maps/EventsMarker'
 import EventsMap from '../Components/maps/EventsMap'
+
+
 
 import { withScriptjs, withGoogleMap, GoogleMap } from 'react-google-maps'
 import EventsMarker from '../Components/maps/EventsMarker'
@@ -115,20 +117,21 @@ class BrowseEvents extends Component {
                      : 'http://placekitten.com/200'} alt='Event' />
                </div>
                <div className='event-info' >
-                  <Link to='/events/1'>
+                  <Link to='/events/view'>
                      <h3>{event.name.text}</h3>
                   </Link>
                   <p>start {event.start.local} / end {event.end.local}</p>
                   <p>LOCATION: {event.venue.address.localized_address_display}</p>
                </div>
                <div><img src="https://img.icons8.com/ios-glyphs/24/000000/share.png" /></div>
+               
             </div>
          );
       })
       return (
          <section className='browse-events'>
             <div>
-               <form className='browse-form' >
+               <form className='browse-form' onSubmit={this.filterEvents} >
                   <input
                      type='text'
                      placeholder='search within name'
@@ -138,7 +141,7 @@ class BrowseEvents extends Component {
                      onChange={this.handleInputChange}
                   />
                   <div className="filter">
-                     <select
+                     <Input type="select"
                         name='filterCategories'		
                         value={this.state.filterCategories}		
                         onChange={this.handleInputChange}
@@ -163,9 +166,9 @@ class BrowseEvents extends Component {
                         <option value='spirituality'>Spirituality</option>		
                         <option value='sports'>Sports and Fitness</option>		
                         <option value='outdoor'>Travel and Outdoor</option>
-                     </select>
+                     </Input>
                      <Button color="info" onClick={this.clearFilter}>clear</Button>{' '}
-                     <Button color="info" onClick={this.filterEvents}>SEARCH</Button>{' '}
+                     <Button color="info" type='submit'>SEARCH</Button>{' '}
                   </div>
                </form>
 

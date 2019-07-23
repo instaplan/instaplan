@@ -117,10 +117,10 @@ figcaption {
 }
 
 .browse-form select {
-  padding: 1em;
+ 
   height: 30px;
-  width: 100px;
-  border-radius: 15px;
+  width: 40%;
+ 
 }
 
 .browse-form input {
