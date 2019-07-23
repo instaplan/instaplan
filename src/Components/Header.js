@@ -3,6 +3,7 @@ import {Link, withRouter} from 'react-router-dom';
 import firebase from 'firebase'
 import {connect} from 'react-redux';
 import {updateIsSignedIn, updateUserIPLocation} from '../ducks/userReducer';
+import {updateEvents} from '../ducks/eventsReducer';
 
 import {
    Collapse,
@@ -24,11 +25,14 @@ class Header extends Component {
       this.toggle = this.toggle.bind(this);
    }
    componentDidMount() {
-      const {userLocation, updateUserIPLocation} = this.props;
+      const {updateUserIPLocation} = this.props;
 
-      // TO CODE: check if user signed in -- if not, grab geolocation for default events search and view
-      if (!userLocation.city) updateUserIPLocation()
-         
+      updateUserIPLocation()
+   }
+   componentDidUpdate(prevProps) {
+      const {updateEvents, userLocation} = this.props;
+
+      if (prevProps.userLocation !== userLocation && userLocation.city) updateEvents(userLocation)
    }
    toggle(){
       this.setState({
@@ -60,7 +64,7 @@ class Header extends Component {
                   {/* <NavItem>
                      <NavLink tag={Link} to='/myevents'>My Events</NavLink>
                   </NavItem> */}
-                  <NavItem><NavLink tag={Link} to='/events/create' onClick = {this.handleSignIn}>Create Event</NavLink></NavItem>
+                  <NavItem><NavLink tag={Link} to='/events/create' onClick = {this.handleSignIn}>My Events</NavLink></NavItem>
                  {/* conditionally render sign in / sign out */}
                   {!this.props.isSignedIn
                   ? null
@@ -91,6 +95,7 @@ const mapStateToProps = reduxState => {
 export default withRouter(connect(mapStateToProps, 
    {
       updateIsSignedIn,
-      updateUserIPLocation
+      updateUserIPLocation,
+      updateEvents
    }
 )(Header));
