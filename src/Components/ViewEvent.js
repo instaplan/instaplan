@@ -1,26 +1,43 @@
 import React from 'react';
-
+import calendar from './calendar.png';
+import marker from './marker.png';
+import shared from './shared.png'
 // need to code around design
 // fix refresh issue
 // add in code for user added events
 
 function ViewEvent(props) {
 
-   const {title, organizer, description, startTime, date, endTime, img, address, type} = props.location.state;
+   const { title, organizer, description, startTime, date, endTime, img, address, type } = props.location.state;
 
    return (
       <article>
-         <div>
+         <div className='view-event' >
             <img src={img} alt='Event' />
-            <p>{description}</p>
-            {type === 'eventbrite' ? <div>📨[SHARE ICON]</div> : null}
+            {type === 'eventbrite' ? <div className='share' ><img src={shared} alt=""/></div> : null}
          </div>
-         <div>
+         <div className='view-info' >
             <h1>{title}</h1>
             <h4>by {organizer}</h4>
-            <p>{startTime ? `Start: ${startTime}` : `Date: ${date}`}</p>
-            <p>{endTime ? `End: ${endTime}` : null}</p>
-            <p>{address}</p>
+            <div className="dates">
+               <div className="calendar">
+                  <img src={calendar} alt="calendar" />
+               </div>
+               <div className="times">
+                  <p>{startTime ? `Start: ${startTime}` : `Date: ${date}`}</p>
+                  <p>{endTime ? `End: ${endTime}` : null}</p>
+               </div>
+            </div>
+            <div className="dates">
+               <div className="calendar">
+                  <img src={marker} alt="mapmarker" />
+               </div>
+               <div className="address">
+                  <p>{address}</p>
+               </div>
+            </div>
+                  <p>{description}</p>
+
          </div>
       </article>
    )

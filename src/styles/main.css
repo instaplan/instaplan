@@ -6,6 +6,10 @@ body {
   font-family: 'Asap', sans-serif;
 }
 
+.navbar-toggler {
+  width: 50px;
+}
+
 .main {
   overflow: hidden;
   position: relative;
@@ -122,10 +126,8 @@ form {
 }
 
 .browse-form select {
-
   height: 30px;
   width: 40%;
-
 }
 
 .browse-form input {
@@ -351,6 +353,90 @@ form {
 .info-window img {
   max-width: 100%;
   height: auto;
+}
+
+.share {
+  height: 50px;
+  max-height: 50px;
+  max-width: 50px;
+  width: 50px;
+  border-radius: 50%;
+  border: 1px solid grey;
+  background-color: #FFF;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: -25px;
+  margin-right: -200px;
+}
+
+.view-event {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.view-event > img {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+}
+
+.view-info {
+  margin: 2em 8% 1em 8%;
+}
+
+.view-info h1 {
+  font-size: 1.8rem;
+}
+
+.view-info h4 {
+  font-size: 1.2rem;
+}
+
+.dates {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  max-width: 250px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-top: 1em;
+}
+
+.dates .calendar {
+  height: 30px;
+  width: 30px;
+}
+
+.dates .times p {
+  margin-bottom: 0;
+}
+
+.dates .address {
+  max-width: 165px;
 }
 
 footer {
