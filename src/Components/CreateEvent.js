@@ -127,7 +127,7 @@ class GoogleSuggest extends Component {
                             name='date'
                             onChange={this.handleFormDataChange}
                         />
-                    
+
                     {/* TITLE */}
                     <Input
                         placeholder='title'
@@ -217,6 +217,7 @@ class GoogleSuggest extends Component {
                     <div>
                         <Button onClick={this.handleAddImage} >Submit</Button>
                         <Button>Cancel</Button>
+                    </div>
                     </div>
                     </div>
                 </Form>
