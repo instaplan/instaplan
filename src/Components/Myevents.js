@@ -23,7 +23,7 @@ class MyEvents extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.userId !== this.props.userId) this.getEvents();
+    if (prevProps.userId == this.props.userId) this.getEvents();
   }
   getEvents() {
     axios.get(`/api/events/${this.props.userId}`).then(response => {
