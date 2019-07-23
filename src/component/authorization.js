@@ -39,7 +39,7 @@ class Authorization extends Component {
          
           firebase.auth().onAuthStateChanged(user => {
               this.props.updateIsSignedIn(!!user)
-          })
+          }) 
           // this.props.updateUserID(firebase.auth().currentUser.uid)
       }
 
@@ -51,9 +51,11 @@ class Authorization extends Component {
             <div>Signed In!</div>
             {/* <button onClick={() => firebase.auth().signOut()}>Sign out!</button> */}
             <h1>Welcome {firebase.auth().currentUser.displayName}</h1>
-            
+
+
 
             <div>
+            
                 <GoogleSuggest />
                 <h1>My Events</h1>
                 <MyEvents />

@@ -7,6 +7,11 @@ import UsersEventList from './UsersEventList';
 import EventsMap from '../Components/maps/EventsMap'
 
 
+
+
+import { withScriptjs, withGoogleMap, GoogleMap } from 'react-google-maps'
+import EventsMarker from '../Components/maps/EventsMarker'
+
 class BrowseEvents extends Component {
    constructor(props) {
       super(props);
@@ -136,6 +141,7 @@ class BrowseEvents extends Component {
                   <p>LOCATION: {event.venue.address.localized_address_display}</p>
                </div>
                <div><img src="https://img.icons8.com/ios-glyphs/24/000000/share.png" /></div>
+               
             </div>
          );
       })
@@ -143,7 +149,9 @@ class BrowseEvents extends Component {
          <section className='browse-events'>
             <div>
 
-               <form className='browse-form'  onSubmit={this.filterEvents} >
+
+               <form className='browse-form' onSubmit={this.filterEvents}>
+
 
                   <input
                      type='text'
@@ -154,8 +162,9 @@ class BrowseEvents extends Component {
                      onChange={this.handleInputChange}
                   />
                   <div className="filter">
-                     <Input
-                        type='select'
+
+                     <Input type="select"
+
                         name='filterCategories'		
                         value={this.state.filterCategories}		
                         onChange={this.handleInputChange}

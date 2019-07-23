@@ -155,91 +155,115 @@ class GoogleSuggest extends Component {
                             onChange={this.handleFormDataChange}
                         />
 
-                        {/* // BEGIN GOOGLE ADDRESS INPUT */}
-                        <GoogleMapLoader
-                            params={{
-                                key: MY_API_KEY,
-                                libraries: "places,geocode",
-                            }}
-                            render={googleMaps =>
-                                googleMaps && (
-                                    <GooglePlacesSuggest
-                                        googleMaps={googleMaps}
-                                        autocompletionRequest={{
-                                            input: search,
-                                            // Optional options
-                                            // https://developers.google.com/maps/documentation/javascript/reference?hl=fr#AutocompletionRequest
-                                        }}
-                                        // Optional props
-                                        onNoResult={this.handleNoResult}
-                                        onSelectSuggest={this.handleSelectSuggest}
-                                        onStatusUpdate={this.handleStatusUpdate}
-                                        textNoResults="My custom no results text" // null or "" if you want to disable the no results item
-                                        customRender={prediction => (
-                                            <div className="customWrapper">
-                                                {prediction
-                                                    ? prediction.description
-                                                    : "My custom no results text"}
-                                            </div>
-                                        )}
-                                    >
-                                        <Input
-                                            type="text"
-                                            value={value}
-                                            placeholder="Search a location"
-                                            onChange={this.handleLocationChange}
-                                        />
-                                    </GooglePlacesSuggest>
-                                )
-                            }
-                        />
-                        {/* // END GOOGLE ADDRESS INPUT */}
+                        <button onClick={e => {
+                            e.preventDefault();
+                            document.getElementById('selectedFile').click()}
+                        }>Choose</button>
 
-                        {/* CATEGORY */}
-                        <Input type="select"
-                            value={this.state.category}
-                            name='category'
-                            onChange={this.handleFormDataChange}
-                        >
+                    </FormGroup>
 
-                            <option value='' disabled selected>category:</option>
-                            <option value='auto'>Auto, Boat, and Air</option>
-                            <option value='business'>Business</option>
-                            <option value='charity'>Charity and Causes</option>
-                            <option value='family'>Family and Education</option>
-                            <option value='fashion'>Fashion</option>
-                            <option value='media'>Film and Media</option>
-                            <option value='food'>Food and Drink</option>
-                            <option value='government'>Government</option>
-                            <option value='health'>Health</option>
-                            <option value='hobbies'>Hobbies</option>
-                            <option value='holiday'>Holiday</option>
-                            <option value='lifestyle'>Home and Lifestyle</option>
-                            <option value='music'>Music</option>
+                    {/* TITLE */}
+                    <Input
+                        placeholder='title'
+                        type='text'
+                        value={this.state.title}
+                        name='title'
+                        onChange={this.handleFormDataChange}
+                    />
+                    {/* DATE */}
+                    <Input
+                        type='date'
+                        value={this.state.date}
+                        name='date'
+                        onChange={this.handleFormDataChange}
+                    />
 
-                            <option value='other'>Other</option>
-                            <option value='performing'>Performing and Visual Arts</option>
-                            <option value='school'>School Activities</option>
-                            <option value='tech'>Science and Tech</option>
-                            <option value='spirituality'>Spirituality</option>
-                            <option value='sports'>Sports and Fitness</option>
-                            <option value='outdoor'>Travel and Outdoor</option>
-                        </Input>
+                    {/* // BEGIN GOOGLE ADDRESS INPUT */}
+                    <GoogleMapLoader
+                        params={{
+                            key: MY_API_KEY,
+                            libraries: "places,geocode",
+                        }}
+                        render={googleMaps =>
+                            googleMaps && (
+                                <GooglePlacesSuggest
+                                    googleMaps={googleMaps}
+                                    autocompletionRequest={{
+                                        input: search,
+                                        // Optional options
+                                        // https://developers.google.com/maps/documentation/javascript/reference?hl=fr#AutocompletionRequest
+                                    }}
+                                    // Optional props
+                                    onNoResult={this.handleNoResult}
+                                    onSelectSuggest={this.handleSelectSuggest}
+                                    onStatusUpdate={this.handleStatusUpdate}
+                                    textNoResults="My custom no results text" // null or "" if you want to disable the no results item
+                                    customRender={prediction => (
+                                        <div className="customWrapper">
+                                            {prediction
+                                                ? prediction.description
+                                                : "My custom no results text"}
+                                        </div>
+                                    )}
+                                >
+                                    <Input
+                                        type="text"
+                                        value={value}
+                                        placeholder="Search a location"
+                                        onChange={this.handleLocationChange}
+                                    />
+                                </GooglePlacesSuggest>
+                            )
+                        }
+                    />
+                    {/* // END GOOGLE ADDRESS INPUT */}
+
+                    {/* CATEGORY */}
+                    <Input type="select" 
+                        value={this.state.category}
+                        name='category'
+                        onChange={this.handleFormDataChange}
+                    >
+                        <option value='' disabled selected>category:</option>
+                        <option value='auto'>Auto, Boat, and Air</option>
+                        <option value='business'>Business</option>
+                        <option value='charity'>Charity and Causes</option>
+                        <option value='family'>Family and Education</option>
+                        <option value='fashion'>Fashion</option>
+                        <option value='media'>Film and Media</option>
+                        <option value='food'>Food and Drink</option>
+                        <option value='government'>Government</option>
+                        <option value='health'>Health</option>
+                        <option value='hobbies'>Hobbies</option>
+                        <option value='holiday'>Holiday</option>
+                        <option value='lifestyle'>Home and Lifestyle</option>
+                        <option value='music'>Music</option>
+
+                        <option value='other'>Other</option>
+                        <option value='performing'>Performing and Visual Arts</option>
+                        <option value='school'>School Activities</option>
+                        <option value='tech'>Science and Tech</option>
+                        <option value='spirituality'>Spirituality</option>
+                        <option value='sports'>Sports and Fitness</option>
+                        <option value='outdoor'>Travel and Outdoor</option>
+
+                        <option value=''>More categories to populate from db</option>
+                    </Input>
 
 
-                        {/* DESCRIPTION */}
-                        <Input type='testarea'
-                            placeholder='event description'
-                            value={this.state.description}
-                            name='description'
-                            onChange={this.handleFormDataChange}
-                        />
+                    {/* DESCRIPTION */}
+                    <Input type='testarea'
+                        placeholder='event description'
+                        value={this.state.description}
+                        name='description'
+                        onChange={this.handleFormDataChange}
+                    />
 
-                        {/* FORM BUTTONS */}
-                        <div className='form-buttons' >
-                            <Button onClick={this.handleAddImage} >Submit</Button>
-                            <Button>Cancel</Button>
-                        </div>
+                    {/* FORM BUTTONS */}
+                    <div>
+                        <Button onClick={this.handleAddImage} >Submit</Button>
+                        <Button>Cancel</Button>
+
                     </div>
                 </Form>
             </div>
