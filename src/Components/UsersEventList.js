@@ -48,16 +48,22 @@ class UsersEventList extends Component {
               <img src={events.awsurl} alt="Event" />
             </div>
             <div className="event-info">
-              <Link to="/events/1">
+              <Link to={{
+                pathname: '/events/view',
+                state: {
+                  title: events.title,
+                  organizer: events.userid,
+                  description: events.description,
+                  date: events.date,
+                  img: events.awsurl,
+                  address: events.location,
+                  type: 'instaplan'
+                }
+              }}>
                 <h3>{events.title}</h3>
               </Link>
               <p>Date {events.date}</p>
               <p>LOCATION {events.location}</p>
-             
-              
-            </div>
-            <div>
-              <img src="https://img.icons8.com/ios-glyphs/24/000000/share.png" />
             </div>
           </div>
         </div>
