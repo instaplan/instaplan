@@ -42,7 +42,6 @@ export default class DoctorMarker extends React.Component {
                 </div>
                 <h1>{this.props.event.name.text}</h1>
                 <p>{this.props.event.venue.address.address_1}</p>
-                <Button color='primary'>See Event</Button>{' '}
               </div>
             </InfoWindow> : null
           }

@@ -17,7 +17,7 @@ const EventsMap = withScriptjs(withGoogleMap((props) => {
 
         return (
             <GoogleMap
-                defaultZoom={14}
+                defaultZoom={10}
                 center={{lat: userLat, lng: userLng}}
                 >
                     {markers}

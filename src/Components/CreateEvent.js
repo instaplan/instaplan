@@ -3,10 +3,10 @@ import GoogleMapLoader from "react-google-maps-loader"
 import GooglePlacesSuggest from "react-google-places-suggest"
 import { API_KEY } from "../config/config"
 import axios from 'axios'
-import {withRouter} from 'react-router-dom';
-import {connect} from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import firebase from 'firebase'
-import {updateUserId} from '../ducks/userReducer';
+import { updateUserId } from '../ducks/userReducer';
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 
 const MY_API_KEY = API_KEY // fake
@@ -31,11 +31,12 @@ class GoogleSuggest extends Component {
         this.handleAddImage = this.handleAddImage.bind(this);
     }
 
-    componentDidMount( ) {this.setState({userid: firebase.auth().currentUser.uid})
-        
-    
+    componentDidMount() {
+        this.setState({ userid: firebase.auth().currentUser.uid })
+
+
     }
-    componentDidUpdate(prevState){
+    componentDidUpdate(prevState) {
         if (prevState.userid !== this.state.userid) this.props.updateUserId(this.state.userid)
     }
     userImgHandler(file) {
@@ -83,7 +84,7 @@ class GoogleSuggest extends Component {
                 }
             })
             .then(res => {
-                const {img_aws_key, img_aws_url} = res.data;
+                const { img_aws_key, img_aws_url } = res.data;
                 this.handleAddEvent(img_aws_key, img_aws_url)
             })
     }
@@ -99,7 +100,7 @@ class GoogleSuggest extends Component {
             userid: this.state.userid
 
         }
-        
+
         axios
             .post('/api/events', newValues)
             .then(() => {
@@ -114,132 +115,134 @@ class GoogleSuggest extends Component {
         const { search, value } = this.state
 
         return (
-            <Form className='create-form' action="">
-                <div className='create-inputs'>
-                    {/* IMAGE */}
-                    <img src={this.state.fileUrl} alt='Event' />
-                    <FormGroup>
+            <div className="form">
+                <Form className='create-form' action="">
+                    <div className='create-inputs'>
+                        {/* IMAGE */}
+                        <FormGroup>
+                            <div className="form-upload">
+                                <img src={this.state.fileUrl} alt='Event' />
+                                <Input
+                                    type='file'
+                                    id='selectedFile'
+                                    style={{ display: 'none' }}
+                                    onChange={e => this.userImgHandler(e.target.files[0])}
+                                />
+                                <button onClick={e => {
+                                    e.preventDefault();
+                                    document.getElementById('selectedFile').click()
+                                }
+                                }>Choose</button>
+                            </div>
+
+
+
+                        </FormGroup>
+
+                        {/* TITLE */}
                         <Input
-                            type='file'
-                            id='selectedFile'
-                            style={{ display: 'none' }}
-                            onChange={e => this.userImgHandler(e.target.files[0])}
+                            placeholder='title'
+                            type='text'
+                            value={this.state.title}
+                            name='title'
+                            onChange={this.handleFormDataChange}
                         />
-                        <button onClick={e => {
-                            e.preventDefault();
-                            document.getElementById('selectedFile').click()}
-                        }>Choose</button>
+                        {/* DATE */}
+                        <Input
+                            type='date'
+                            value={this.state.date}
+                            name='date'
+                            onChange={this.handleFormDataChange}
+                        />
+
+                        {/* // BEGIN GOOGLE ADDRESS INPUT */}
+                        <GoogleMapLoader
+                            params={{
+                                key: MY_API_KEY,
+                                libraries: "places,geocode",
+                            }}
+                            render={googleMaps =>
+                                googleMaps && (
+                                    <GooglePlacesSuggest
+                                        googleMaps={googleMaps}
+                                        autocompletionRequest={{
+                                            input: search,
+                                            // Optional options
+                                            // https://developers.google.com/maps/documentation/javascript/reference?hl=fr#AutocompletionRequest
+                                        }}
+                                        // Optional props
+                                        onNoResult={this.handleNoResult}
+                                        onSelectSuggest={this.handleSelectSuggest}
+                                        onStatusUpdate={this.handleStatusUpdate}
+                                        textNoResults="My custom no results text" // null or "" if you want to disable the no results item
+                                        customRender={prediction => (
+                                            <div className="customWrapper">
+                                                {prediction
+                                                    ? prediction.description
+                                                    : "My custom no results text"}
+                                            </div>
+                                        )}
+                                    >
+                                        <Input
+                                            type="text"
+                                            value={value}
+                                            placeholder="Search a location"
+                                            onChange={this.handleLocationChange}
+                                        />
+                                    </GooglePlacesSuggest>
+                                )
+                            }
+                        />
+                        {/* // END GOOGLE ADDRESS INPUT */}
+
+                        {/* CATEGORY */}
+                        <Input type="select"
+                            value={this.state.category}
+                            name='category'
+                            onChange={this.handleFormDataChange}
+                        >
+
+                            <option value='' disabled selected>category:</option>
+                            <option value='auto'>Auto, Boat, and Air</option>
+                            <option value='business'>Business</option>
+                            <option value='charity'>Charity and Causes</option>
+                            <option value='family'>Family and Education</option>
+                            <option value='fashion'>Fashion</option>
+                            <option value='media'>Film and Media</option>
+                            <option value='food'>Food and Drink</option>
+                            <option value='government'>Government</option>
+                            <option value='health'>Health</option>
+                            <option value='hobbies'>Hobbies</option>
+                            <option value='holiday'>Holiday</option>
+                            <option value='lifestyle'>Home and Lifestyle</option>
+                            <option value='music'>Music</option>
+
+                            <option value='other'>Other</option>
+                            <option value='performing'>Performing and Visual Arts</option>
+                            <option value='school'>School Activities</option>
+                            <option value='tech'>Science and Tech</option>
+                            <option value='spirituality'>Spirituality</option>
+                            <option value='sports'>Sports and Fitness</option>
+                            <option value='outdoor'>Travel and Outdoor</option>
+                        </Input>
 
 
-                    </span>
+                        {/* DESCRIPTION */}
+                        <Input type='testarea'
+                            placeholder='event description'
+                            value={this.state.description}
+                            name='description'
+                            onChange={this.handleFormDataChange}
+                        />
 
-                    </FormGroup>
-
-                    {/* TITLE */}
-                    <Input
-                        placeholder='title'
-                        type='text'
-                        value={this.state.title}
-                        name='title'
-                        onChange={this.handleFormDataChange}
-                    />
-                    {/* DATE */}
-                    <Input
-                        type='date'
-                        value={this.state.date}
-                        name='date'
-                        onChange={this.handleFormDataChange}
-                    />
-
-                    {/* // BEGIN GOOGLE ADDRESS INPUT */}
-                    <GoogleMapLoader
-                        params={{
-                            key: MY_API_KEY,
-                            libraries: "places,geocode",
-                        }}
-                        render={googleMaps =>
-                            googleMaps && (
-                                <GooglePlacesSuggest
-                                    googleMaps={googleMaps}
-                                    autocompletionRequest={{
-                                        input: search,
-                                        // Optional options
-                                        // https://developers.google.com/maps/documentation/javascript/reference?hl=fr#AutocompletionRequest
-                                    }}
-                                    // Optional props
-                                    onNoResult={this.handleNoResult}
-                                    onSelectSuggest={this.handleSelectSuggest}
-                                    onStatusUpdate={this.handleStatusUpdate}
-                                    textNoResults="My custom no results text" // null or "" if you want to disable the no results item
-                                    customRender={prediction => (
-                                        <div className="customWrapper">
-                                            {prediction
-                                                ? prediction.description
-                                                : "My custom no results text"}
-                                        </div>
-                                    )}
-                                >
-                                    <Input
-                                        type="text"
-                                        value={value}
-                                        placeholder="Search a location"
-                                        onChange={this.handleLocationChange}
-                                    />
-                                </GooglePlacesSuggest>
-                            )
-                        }
-                    />
-                    {/* // END GOOGLE ADDRESS INPUT */}
-
-                    {/* CATEGORY */}
-                    <Input type="select" 
-                        value={this.state.category}
-                        name='category'
-                        onChange={this.handleFormDataChange}
-                    >
-                        <option value='' disabled selected>category:</option>
-                        <option value='auto'>Auto, Boat, and Air</option>
-                        <option value='business'>Business</option>
-                        <option value='charity'>Charity and Causes</option>
-                        <option value='family'>Family and Education</option>
-                        <option value='fashion'>Fashion</option>
-                        <option value='media'>Film and Media</option>
-                        <option value='food'>Food and Drink</option>
-                        <option value='government'>Government</option>
-                        <option value='health'>Health</option>
-                        <option value='hobbies'>Hobbies</option>
-                        <option value='holiday'>Holiday</option>
-                        <option value='lifestyle'>Home and Lifestyle</option>
-                        <option value='music'>Music</option>
-
-                        <option value='other'>Other</option>
-                        <option value='performing'>Performing and Visual Arts</option>
-                        <option value='school'>School Activities</option>
-                        <option value='tech'>Science and Tech</option>
-                        <option value='spirituality'>Spirituality</option>
-                        <option value='sports'>Sports and Fitness</option>
-                        <option value='outdoor'>Travel and Outdoor</option>
-                     </select>
-
-                        <option value=''>More categories to populate from db</option>
-                    </Input>
-
-
-                    {/* DESCRIPTION */}
-                    <Input type='testarea'
-                        placeholder='event description'
-                        value={this.state.description}
-                        name='description'
-                        onChange={this.handleFormDataChange}
-                    />
-
-                    {/* FORM BUTTONS */}
-                    <div>
-                        <Button onClick={this.handleAddImage} >Submit</Button>
-                        <Button>Cancel</Button>
+                        {/* FORM BUTTONS */}
+                        <div className='form-buttons' >
+                            <Button onClick={this.handleAddImage} >Submit</Button>
+                            <Button>Cancel</Button>
+                        </div>
                     </div>
-                </div>
-            </Form>
+                </Form>
+            </div>
 
 
 

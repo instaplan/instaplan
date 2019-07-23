@@ -96,12 +96,17 @@ figcaption {
     // overflow: hidden;
 }
 
+form {
+    margin: 0!important;
+}
+
 .browse-form {
     margin-left: 2em;
     display: flex;
     flex-direction: column;
     margin-top: 1em;
     margin-bottom: 2em;
+    margin-right: 0!important;
     width: 40vw; 
     button {
         height: 40px;
@@ -109,10 +114,9 @@ figcaption {
     }
 
     select {
-        padding: 1em;
         height: 30px;
-        width: 100px;
-        border-radius: 15px;
+        width: 40%;
+        // border-radius: 15px;
     }
 
     input {
@@ -202,16 +206,54 @@ figcaption {
 
 
 //CREATE EVENT
+.form {
+    height: 90vh;
+}
+
+.form-upload {
+    display: flex;
+    flex-direction: row;
+    width: 200px;
+    img {
+        max-width: 100px;
+        height: auto;
+    }
+
+    button {
+        padding: 0;
+        width: 80px;
+        height: 30px;
+        margin-left: 10px;
+        margin-top: auto;
+    }
+}
 .create-form {
+    margin: 0;
     display: flex;
     flex-direction: column;
+    justify-content: space-evenly;
     width: 100vw;
-
+    height: 100%;
+    align-items: center;
     .create-inputs {
         display: flex;
         flex-direction: column;
-        width: 60%;
+        justify-content: space-evenly;
+        width: 90%;
+        max-width: 715px;
+        height: 100%;
         align-items: center;
+    }
+}
+
+.form-buttons {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-evenly;
+    button {
+        height: 30px;
+        width: 90px;
     }
 }
 
