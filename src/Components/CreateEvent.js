@@ -3,10 +3,10 @@ import GoogleMapLoader from "react-google-maps-loader"
 import GooglePlacesSuggest from "react-google-places-suggest"
 import { API_KEY } from "../config/config"
 import axios from 'axios'
-import {withRouter} from 'react-router-dom';
-import {connect} from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import firebase from 'firebase'
-import {updateUserId} from '../ducks/userReducer';
+import { updateUserId } from '../ducks/userReducer';
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 
 const MY_API_KEY = API_KEY // fake
@@ -31,11 +31,12 @@ class GoogleSuggest extends Component {
         this.handleAddImage = this.handleAddImage.bind(this);
     }
 
-    componentDidMount( ) {this.setState({userid: firebase.auth().currentUser.uid})
-        
-    
+    componentDidMount() {
+        this.setState({ userid: firebase.auth().currentUser.uid })
+
+
     }
-    componentDidUpdate(prevState){
+    componentDidUpdate(prevState) {
         if (prevState.userid !== this.state.userid) this.props.updateUserId(this.state.userid)
     }
     userImgHandler(file) {
@@ -83,7 +84,7 @@ class GoogleSuggest extends Component {
                 }
             })
             .then(res => {
-                const {img_aws_key, img_aws_url} = res.data;
+                const { img_aws_key, img_aws_url } = res.data;
                 this.handleAddEvent(img_aws_key, img_aws_url)
             })
     }
@@ -99,7 +100,7 @@ class GoogleSuggest extends Component {
             userid: this.state.userid
 
         }
-        
+
         axios
             .post('/api/events', newValues)
             .then(() => {
@@ -114,17 +115,46 @@ class GoogleSuggest extends Component {
         const { search, value } = this.state
 
         return (
-            <Form className='create-form' action="">
-                <div className='create-inputs'>
-                    {/* IMAGE */}
-                    <img src={this.state.fileUrl} alt='Event' />
-                    <FormGroup>
+            <div className="form">
+                <Form className='create-form' action="">
+                    <div className='create-inputs'>
+                        {/* IMAGE */}
+                        <FormGroup>
+                            <div className="form-upload">
+                                <img src={this.state.fileUrl} alt='Event' />
+                                <Input
+                                    type='file'
+                                    id='selectedFile'
+                                    style={{ display: 'none' }}
+                                    onChange={e => this.userImgHandler(e.target.files[0])}
+                                />
+                                <button onClick={e => {
+                                    e.preventDefault();
+                                    document.getElementById('selectedFile').click()
+                                }
+                                }>Choose</button>
+                            </div>
+
+
+
+                        </FormGroup>
+
+                        {/* TITLE */}
                         <Input
-                            type='file'
-                            id='selectedFile'
-                            style={{ display: 'none' }}
-                            onChange={e => this.userImgHandler(e.target.files[0])}
+                            placeholder='title'
+                            type='text'
+                            value={this.state.title}
+                            name='title'
+                            onChange={this.handleFormDataChange}
                         />
+                        {/* DATE */}
+                        <Input
+                            type='date'
+                            value={this.state.date}
+                            name='date'
+                            onChange={this.handleFormDataChange}
+                        />
+
                         <button onClick={e => {
                             e.preventDefault();
                             document.getElementById('selectedFile').click()}
@@ -233,9 +263,10 @@ class GoogleSuggest extends Component {
                     <div>
                         <Button onClick={this.handleAddImage} >Submit</Button>
                         <Button>Cancel</Button>
+
                     </div>
-                </div>
-            </Form>
+                </Form>
+            </div>
 
 
 

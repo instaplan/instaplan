@@ -97,6 +97,10 @@ figcaption {
   display: flex;
 }
 
+form {
+  margin: 0 !important;
+}
+
 .browse-form {
   margin-left: 2em;
   display: -webkit-box;
@@ -108,6 +112,7 @@ figcaption {
           flex-direction: column;
   margin-top: 1em;
   margin-bottom: 2em;
+  margin-right: 0 !important;
   width: 40vw;
 }
 
@@ -234,16 +239,37 @@ figcaption {
   height: 300px;
   width: 300px;
 }
-.aboutUs {
-  background-image: url("https://bme.udel.edu/wp-content/uploads/2016/08/blue-teal-gradient-background.jpg");
-  margin: 0;
+
+.form {
+  height: 90vh;
+}
+
+.form-upload {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  width: 200px;
+}
+
+.form-upload img {
+  max-width: 100px;
+  height: auto;
+}
+
+.form-upload button {
   padding: 0;
-  height: 100vh;
-  position: relative;
-  font-size: 40px
+  width: 80px;
+  height: 30px;
+  margin-left: 10px;
+  margin-top: auto;
 }
 
 .create-form {
+  margin: 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -251,7 +277,14 @@ figcaption {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
   width: 100vw;
+  height: 100%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .create-form .create-inputs {
@@ -262,10 +295,34 @@ figcaption {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  width: 60%;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  width: 90%;
+  max-width: 715px;
+  height: 100%;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.form-buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  width: 100%;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+.form-buttons button {
+  height: 30px;
+  width: 90px;
 }
 
 .info-window {

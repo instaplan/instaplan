@@ -4,13 +4,14 @@ import { Button, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 import { updateEvents } from '../ducks/eventsReducer';
 import UsersEventList from './UsersEventList';
-// import EventsMarker from '../Components/maps/EventsMarker'
 import EventsMap from '../Components/maps/EventsMap'
+
 
 
 
 import { withScriptjs, withGoogleMap, GoogleMap } from 'react-google-maps'
 import EventsMarker from '../Components/maps/EventsMarker'
+
 class BrowseEvents extends Component {
    constructor(props) {
       super(props);
@@ -148,7 +149,9 @@ class BrowseEvents extends Component {
          <section className='browse-events'>
             <div>
 
+
                <form className='browse-form' onSubmit={this.filterEvents}>
+
 
                   <input
                      type='text'
@@ -159,7 +162,9 @@ class BrowseEvents extends Component {
                      onChange={this.handleInputChange}
                   />
                   <div className="filter">
+
                      <Input type="select"
+
                         name='filterCategories'		
                         value={this.state.filterCategories}		
                         onChange={this.handleInputChange}
@@ -186,7 +191,9 @@ class BrowseEvents extends Component {
                         <option value='outdoor'>Travel and Outdoor</option>
                      </Input>
                      <Button color="info" onClick={this.clearFilter}>clear</Button>{' '}
+
                      <Button color="info" type='submit'>SEARCH</Button>{' '}
+
                   </div>
                </form>
 

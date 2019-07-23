@@ -52,6 +52,8 @@ class Authorization extends Component {
             {/* <button onClick={() => firebase.auth().signOut()}>Sign out!</button> */}
             <h1>Welcome {firebase.auth().currentUser.displayName}</h1>
 
+
+
             <div>
             
                 <GoogleSuggest />
