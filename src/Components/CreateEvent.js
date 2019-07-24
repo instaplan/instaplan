@@ -219,7 +219,7 @@ class GoogleSuggest extends Component {
                         <Button>Cancel</Button>
                     </div>
                     </div>
-                    </div>
+                    
                 </Form>
             </div>
         )
