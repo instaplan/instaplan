@@ -62,8 +62,10 @@ function Landing(props) {
          
 
          </section>
+
          
          <Link to='/events'><Button id='browse-more' color="primary">Browse More</Button>{' '}</Link>
+
       </section>
    )
 }
