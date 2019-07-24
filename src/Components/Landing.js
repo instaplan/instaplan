@@ -59,9 +59,9 @@ function Landing(props) {
 
             {featuredEvents}
          
-            <p><Link to='/events'>Browse More</Link></p>
 
          </section>
+            <p><Link to='/events'>Browse More</Link></p>
       </section>
    )
 }
