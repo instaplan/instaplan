@@ -10,6 +10,13 @@ const UPDATE_EVENTS = 'UPDATE_EVENTS';
 const UPDATE_FILTERED_EVENTS = 'UPDATE_FILTERED_EVENTS';
 const UPDATE_FILTER_CATEGORY = 'UPDATE_FILTER_CATEGORY';
 const UPDATE_FILTER_QUERY = 'UPDATE_FILTER_QUERY';
+
+
+export function add (a,b) {
+   return a + b
+}
+
+
 export function updateEvents(locationObj) {
    return {
       type: UPDATE_EVENTS,
