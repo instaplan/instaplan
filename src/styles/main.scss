@@ -302,10 +302,15 @@ form {
     display: flex;
     flex-direction: column;
     align-items: center;
-
-    > img {
+    width: 100%;
+}
+.view-image {
+    height: auto;
+    width: 100%;
+    max-width: 500px;
+    img {
         width: 100%;
-        max-width: 500px;
+        // max-width: 500px;
         height: auto;
     }
 }
