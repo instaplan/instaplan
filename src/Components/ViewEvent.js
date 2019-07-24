@@ -16,7 +16,6 @@ function ViewEvent(props) {
             <div className="view-image">
                <img src={img} alt='Event' />
             </div>
-            {type === 'eventbrite' ? <div className='share' ><img src={shared} alt=""/></div> : null}
          </div>
          <div className='view-info' >
             <h1>{title}</h1>

@@ -8,6 +8,7 @@
     "aws-sdk": "^2.495.0",
     "axios": "^0.19.0",
     "bootstrap": "^4.3.1",
+    "cypress": "^3.4.0",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "firebase": "^6.3.0",
@@ -38,7 +39,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cypress:open": "./node_modules/.bin/cypress open"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -54,5 +56,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "devDependencies": {}
 }
