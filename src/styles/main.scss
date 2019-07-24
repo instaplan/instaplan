@@ -107,7 +107,7 @@ form {
     margin-left: 2em;
     display: flex;
     flex-direction: column;
-    margin-top: 1em;
+    margin-top: 2em;
     margin-bottom: 2em;
     margin-right: 0!important;
     width: 40vw; 
@@ -135,6 +135,7 @@ form {
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
+        margin-bottom: 1em;
     }
 
     button {
@@ -283,6 +284,16 @@ form {
 }
 
 //VIEW EVENT
+.main-event {
+    height: 70vh;
+    justify-content: space-evenly;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+
 .share {
     height: 50px;
     max-height: 50px;
@@ -304,6 +315,7 @@ form {
     align-items: center;
     width: 100%;
 }
+
 .view-image {
     height: auto;
     width: 100%;
@@ -407,7 +419,7 @@ footer li {
     }
 
     .event-row {
-        width: 90vw;
+        width: 100vw;
     }
 
     .event-image img {
@@ -467,5 +479,11 @@ footer li {
         max-height: 250px;
         height: auto;
         border-radius: 5px;
+    }
+}
+
+@media (max-width: 539px){
+    .browse-form {
+        width: 90vw;
     }
 }

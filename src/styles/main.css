@@ -114,7 +114,7 @@ form {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  margin-top: 1em;
+  margin-top: 2em;
   margin-bottom: 2em;
   margin-right: 0 !important;
   width: 40vw;
@@ -152,6 +152,7 @@ form {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  margin-bottom: 1em;
 }
 
 .browse-form button {
@@ -355,6 +356,25 @@ form {
   height: auto;
 }
 
+.main-event {
+  height: 70vh;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  width: 100vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100vh;
+}
+
 .share {
   height: 50px;
   max-height: 50px;
@@ -507,7 +527,7 @@ footer li {
     display: none;
   }
   .event-row {
-    width: 90vw;
+    width: 100vw;
   }
   .event-image img {
     width: 100px;
@@ -560,6 +580,12 @@ footer li {
     max-height: 250px;
     height: auto;
     border-radius: 5px;
+  }
+}
+
+@media (max-width: 539px) {
+  .browse-form {
+    width: 90vw;
   }
 }
 /*# sourceMappingURL=main.css.map */
