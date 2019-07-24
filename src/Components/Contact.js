@@ -39,10 +39,10 @@ function Contact(props) {
    }
 
    return (
-      <section className="main-block">
+      <section id='contact_form' className="main-block">
          <h1>Contact</h1>
 
-         <div>
+         <div id='form_inputs'>
             <form onSubmit={handleFormSubmit}>
                <label>Name</label>
                <input
