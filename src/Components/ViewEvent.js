@@ -11,9 +11,11 @@ function ViewEvent(props) {
    const { title, organizer, description, startTime, date, endTime, img, address, type } = props.location.state;
 
    return (
-      <article>
+      <article className='main-event'>
          <div className='view-event' >
-            <img src={img} alt='Event' />
+            <div className="view-image">
+               <img src={img} alt='Event' />
+            </div>
             {type === 'eventbrite' ? <div className='share' ><img src={shared} alt=""/></div> : null}
          </div>
          <div className='view-info' >
