@@ -23,11 +23,13 @@ html, body {
     background: url('https://vahanen.com/app/uploads/2017/09/Fotolia_100501456_Subscription_Monthly_M.jpg') no-repeat;
     background-size: cover
     }
+
     #form_inputs {
         display: flex;
         justify-content: center;
     
     }
+
     form {
     padding: 5px;
     margin: 5px;
@@ -55,6 +57,7 @@ html, body {
     input::placeholder {
     color: #666;
     }
+
     #contact_form h1 {
         background: #f5f5f5;
     }
