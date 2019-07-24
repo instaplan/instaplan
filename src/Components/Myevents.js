@@ -5,8 +5,6 @@ import { Link } from "react-router-dom";
 import { Button } from "reactstrap";
 import firebase from 'firebase'
 
-
-
 class MyEvents extends Component {
   constructor(props) {
     super(props);
@@ -34,11 +32,11 @@ class MyEvents extends Component {
   }
 
   deleteEvent(id) {
+
     axios.delete(`/api/events/${id}`).then(results => {
-      
+      alert('Event deleted!')
       this.setState({ events: results.data });
     }) 
-    window.location.reload(true);
     
   }
 
@@ -69,9 +67,6 @@ class MyEvents extends Component {
                 Delete
               </Button>
               
-            </div>
-            <div>
-              <img src="https://img.icons8.com/ios-glyphs/24/000000/share.png" />
             </div>
           </div>
         </div>
