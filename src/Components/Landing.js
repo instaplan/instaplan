@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
-import { UncontrolledCarousel } from 'reactstrap';
+import { UncontrolledCarousel, Button } from 'reactstrap';
 import {connect} from 'react-redux';
+
 
 function Landing(props) {
 
@@ -61,7 +62,10 @@ function Landing(props) {
          
 
          </section>
-            <p><Link to='/events'>Browse More</Link></p>
+
+         
+         <Link to='/events'><Button id='browse-more' color="primary">Browse More</Button>{' '}</Link>
+
       </section>
    )
 }
