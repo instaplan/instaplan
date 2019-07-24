@@ -16,6 +16,7 @@ function ViewEvent(props) {
             <div className="view-image">
                <img src={img} alt='Event' />
             </div>
+
          </div>
          <div className='view-info' >
             <h1>{title}</h1>
