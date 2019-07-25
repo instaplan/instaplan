@@ -4,7 +4,7 @@ const multer = require('multer');
 const multerS3 = require('multer-s3');
 const path = require('path');
 
-const {AWS_ACCESSKEYID, AWS_SECRETACCESSKEY, AWS_REGION, AWS_BUCKET} = process.env;
+const { AWS_ACCESSKEYID, AWS_SECRETACCESSKEY, AWS_REGION, AWS_BUCKET } = process.env;
 
 
 aws.config.update({
@@ -13,20 +13,20 @@ aws.config.update({
    region: AWS_REGION
 })
 
-const s3 = new aws.S3( );
+const s3 = new aws.S3();
 
 const fileFilter = (req, file, cb) => {
    if (
-      file.mimetype === 'image/jpeg' || 
-      file.mimetype === 'image/jpg' || 
+      file.mimetype === 'image/jpeg' ||
+      file.mimetype === 'image/jpg' ||
       file.mimetype === 'image/png'
-      ) {
+   ) {
       cb(null, true)
    } else {
       cb(new Error('Files must be in format jpg, jpeg, or png'), false);
    };
 }
- 
+
 const singleUpload = multer({
    fileFilter,
    limits: { fileSize: 4000000 },
@@ -48,9 +48,9 @@ const singleUpload = multer({
    })
 }).single('image')
 
-const imgAdd = function(req, res) {
+const imgAdd = function (req, res) {
 
-   singleUpload(req, res, function(err) { 
+   singleUpload(req, res, function (err) {
 
       if (err) {
          console.log(`File Upload Error: ${err.message}`);

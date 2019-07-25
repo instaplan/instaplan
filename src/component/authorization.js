@@ -4,19 +4,12 @@ import {connect} from 'react-redux';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 import GoogleSuggest from '../Components/CreateEvent';
 import {updateIsSignedIn} from '../ducks/userReducer';
-
-import {API_KEY} from '../config/config';
 import MyEvents from '../Components/Myevents';
-
-// this.props.updateUserID(firebase.auth().currentUser.uid) //
-
 
 firebase.initializeApp({ 
     apiKey:"AIzaSyAptYBKyKOnx7vUpYLMJNP_LbPrU6yohGs",
     authDomain:"event-finder-68c32.firebaseapp.com"
 })
-
-
 
 class Authorization extends Component {
 
@@ -31,12 +24,9 @@ class Authorization extends Component {
           signInSuccess: () => false
         }
       }
-      
 
       componentDidMount =() =>{
 
-        
-         
           firebase.auth().onAuthStateChanged(user => {
               this.props.updateIsSignedIn(!!user)
           }) 
@@ -50,8 +40,6 @@ class Authorization extends Component {
           <span>
 
             <h1>Welcome {firebase.auth().currentUser.displayName}</h1>
-
-
 
             <div>
             

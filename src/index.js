@@ -2,12 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
 import store from './ducks/store';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/main.css';
-import {HashRouter as Router} from 'react-router-dom';
+import { HashRouter as Router } from 'react-router-dom';
 
 ReactDOM.render(
    <Provider store={store}>

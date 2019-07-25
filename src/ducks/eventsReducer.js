@@ -11,12 +11,6 @@ const UPDATE_FILTERED_EVENTS = 'UPDATE_FILTERED_EVENTS';
 const UPDATE_FILTER_CATEGORY = 'UPDATE_FILTER_CATEGORY';
 const UPDATE_FILTER_QUERY = 'UPDATE_FILTER_QUERY';
 
-
-export function add (a,b) {
-   return a + b
-}
-
-
 export function updateEvents(locationObj) {
    return {
       type: UPDATE_EVENTS,
@@ -38,8 +32,8 @@ export function updateFilterQuery(str) {
    }
 }
 export default function eventsReducer(state = initialState, action) {
-   const {type, payload} = action
-   switch(type) {
+   const { type, payload } = action
+   switch (type) {
       case `${UPDATE_EVENTS}_FULFILLED`:
          return {
             ...state,
