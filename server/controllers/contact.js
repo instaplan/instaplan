@@ -1,9 +1,9 @@
 require('dotenv').config();
 const nodemailer = require('nodemailer');
 
-const contact = function(req, res) {
-   const {name, email, message} = req.body;
-   const {EMAIL_HOST, EMAIL_NAME, EMAIL_PW} = process.env;
+const contact = function (req, res) {
+   const { name, email, message } = req.body;
+   const { EMAIL_HOST, EMAIL_NAME, EMAIL_PW } = process.env;
 
    const transport = {
       host: EMAIL_HOST,
@@ -22,14 +22,14 @@ const contact = function(req, res) {
       text: message,
       replyTo: email
    };
-   
+
    transporter.sendMail(helperOptions, (err, success) => {
       if (err) {
          console.log(err);
-         res.send( 'Failed to send message.' );
+         res.send('Failed to send message.');
       } else {
          console.log(success);
-         res.send( 'Message sent!' );
+         res.send('Message sent!');
       };
    })
 }

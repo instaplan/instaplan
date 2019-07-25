@@ -1,10 +1,6 @@
 import React from 'react';
 import calendar from './calendar.png';
 import marker from './marker.png';
-import shared from './shared.png'
-// need to code around design
-// fix refresh issue
-// add in code for user added events
 
 function ViewEvent(props) {
 
@@ -38,7 +34,7 @@ function ViewEvent(props) {
                   <p>{address}</p>
                </div>
             </div>
-                  <p>{description}</p>
+            <p>{description}</p>
 
          </div>
       </article>

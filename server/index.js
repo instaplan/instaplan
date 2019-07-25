@@ -1,4 +1,4 @@
-require ('dotenv').config();
+require('dotenv').config();
 const express = require('express')
 const massive = require('massive');
 const nodemailer = require('nodemailer');
@@ -7,9 +7,7 @@ const eventsController = require('./controllers/eventsController')
 const ebEventsController = require('./controllers/eventBrite');
 const addImg = require('./controllers/addImg');
 
-const {SERVER_PORT, CONNECTION_STRING, EMAIL_HOST, EMAIL_NAME, EMAIL_PW} = process.env
-
-
+const { SERVER_PORT, CONNECTION_STRING, EMAIL_HOST, EMAIL_NAME, EMAIL_PW } = process.env
 
 const app = express();
 app.use(express.json({ limit: '10mb' }));
@@ -20,25 +18,24 @@ massive(CONNECTION_STRING).then(db => {
 }).catch(err => console.log(err))
 
 const transporter = nodemailer.createTransport(
-    {
-       host: EMAIL_HOST,
-       port: 587,
-       secure: false,
-       auth: {
-          user: EMAIL_NAME,
-          pass: EMAIL_PW
-       }
-    }
- );
+   {
+      host: EMAIL_HOST,
+      port: 587,
+      secure: false,
+      auth: {
+         user: EMAIL_NAME,
+         pass: EMAIL_PW
+      }
+   }
+);
 
- 
- transporter.verify((error, success) => {
-    if (error) {
-       console.log(`{Nodemailer Auth: ${error}`);
-    } else {
-       console.log('Server listening for messages!');
-    };
-  })
+transporter.verify((error, success) => {
+   if (error) {
+      console.log(`{Nodemailer Auth: ${error}`);
+   } else {
+      console.log('Server listening for messages!');
+   };
+})
 
 
 // contact form nodemailer
@@ -57,7 +54,6 @@ app.get('/api/events/:id', eventsController.getOne);
 app.put('/api/events/:id', eventsController.update);
 app.delete('/api/events/:id', eventsController.delete);
 
-
 app.listen(SERVER_PORT, () => {
-    console.log(`Server is Listening on port ${SERVER_PORT}`)
+   console.log(`Server is Listening on port ${SERVER_PORT}`)
 })

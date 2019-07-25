@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Axios from 'axios';
 import "../styles/Contact.css"
 
@@ -11,18 +11,18 @@ function Contact(props) {
    });
 
    function handleInputChange(e) {
-      const {name, value} = e.target;
-      setFormData({...formData, [name]: value })
+      const { name, value } = e.target;
+      setFormData({ ...formData, [name]: value })
    }
 
    function handleFormSubmit(e) {
 
       e.preventDefault();
-      const {name, email, message} = formData;
-      if(!name || !email || !message) return alert('One or more fields are empty');
+      const { name, email, message } = formData;
+      if (!name || !email || !message) return alert('One or more fields are empty');
 
       Axios
-         .post('/api/contact', {name, email, message})
+         .post('/api/contact', { name, email, message })
          .then(res => {
             alert(res.data);
             props.history.push('/');
@@ -35,7 +35,7 @@ function Contact(props) {
 
    function handleFormClear(e) {
       if (e) e.preventDefault();
-      setFormData({name: '', email: '', message: ''})
+      setFormData({ name: '', email: '', message: '' })
    }
 
    return (
@@ -51,7 +51,7 @@ function Contact(props) {
                   name='name'
                   onChange={handleInputChange}
                />
-               
+
                <label>Email</label>
                <input
                   type='text'
@@ -71,10 +71,10 @@ function Contact(props) {
                   <button onClick={handleFormClear}>Clear</button>
                   <button type='submit'>Submit</button>
                </span>
-            </form>  
+            </form>
          </div>
          <div>
-            
+
          </div>
       </section>
    )

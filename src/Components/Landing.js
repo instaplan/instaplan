@@ -1,15 +1,13 @@
-import React, {useState} from 'react';
-import {Link} from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { UncontrolledCarousel, Button } from 'reactstrap';
-import {connect} from 'react-redux';
-
+import { connect } from 'react-redux';
 
 function Landing(props) {
-
-   const {events} = props;
+   const { events } = props;
 
    // 'carousel' item count (alter slice)
-   const carouselItems =  events.length > 0 && events.slice(0, 3).map(event => {
+   const carouselItems = events.length > 0 && events.slice(0, 3).map(event => {
       return (
          {
             src: event.logo !== null ? event.logo.url : 'http://placekitten.com/200',
@@ -43,27 +41,23 @@ function Landing(props) {
                      : 'http://placekitten.com/200',
                   address: event.venue.address.localized_address_display,
                   type: 'eventbrite'
-               }}}>...more</Link>
+               }
+            }}>...more</Link>
             </p>
          </article>
       );
    });
-   
-   return (
-      
-      <section>
-         {carouselItems.length > 0 ? <UncontrolledCarousel items={carouselItems} /> : <UncontrolledCarousel items={[{src: 'https://i.ibb.co/Dkh7xss/ezgif-com-crop.gif'}]}/>}
 
-         
+   return (
+
+      <section>
+         {carouselItems.length > 0 ? <UncontrolledCarousel items={carouselItems} /> : <UncontrolledCarousel items={[{ src: 'https://i.ibb.co/Dkh7xss/ezgif-com-crop.gif' }]} />}
+
          <h2 className='landing-header'>Featured Events</h2>
          <section className='landing'>
-
             {featuredEvents}
-         
-
          </section>
 
-         
          <Link to='/events'><Button id='browse-more' color="primary">Browse More</Button>{' '}</Link>
 
       </section>

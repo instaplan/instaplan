@@ -1,31 +1,29 @@
 import React from 'react';
-import { withScriptjs, withGoogleMap, GoogleMap} from 'react-google-maps'
+import { withScriptjs, withGoogleMap, GoogleMap } from 'react-google-maps'
 import EventsMarker from '../maps/EventsMarker'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 
 const EventsMap = withScriptjs(withGoogleMap((props) => {
-    
-    
-    const markers = props.events.map( event => <EventsMarker 
+
+    const markers = props.events.map(event => <EventsMarker
         key={event.id}
         event={event}
-        location={{lat: +event.venue.latitude, lng: +event.venue.longitude}}
-        />)
-        
-        const userLat = parseFloat(props.userLocationLat);
-        const userLng = parseFloat(props.userLocationLng);
+        location={{ lat: +event.venue.latitude, lng: +event.venue.longitude }}
+    />)
 
-        return (
-            <GoogleMap
-                defaultZoom={10}
-                center={{lat: userLat, lng: userLng}}
-                >
-                    {markers}
-                </GoogleMap>
-                
-        )    
-        
-    }
+    const userLat = parseFloat(props.userLocationLat);
+    const userLng = parseFloat(props.userLocationLng);
+
+    return (
+        <GoogleMap
+            defaultZoom={10}
+            center={{ lat: userLat, lng: userLng }}
+        >
+            {markers}
+        </GoogleMap>
+    )
+
+}
 ))
 
 const mapStateToProps = reduxState => {

@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { Button } from "reactstrap";
-import firebase from 'firebase'
 
 class UsersEventList extends Component {
   constructor() {
@@ -31,14 +29,13 @@ class UsersEventList extends Component {
 
   deleteEvent(id) {
     axios.delete(`/api/events/${id}`).then(results => {
-      // console.log(results.data)
       this.setState({ events: results.data });
     });
   }
 
   render() {
 
-    const {filteredUserEvents} = this.state;
+    const { filteredUserEvents } = this.state;
 
     const events = filteredUserEvents === 'no results' ? null : (filteredUserEvents.length > 0 ? filteredUserEvents : this.state.events).map((events, i) => {
       return (

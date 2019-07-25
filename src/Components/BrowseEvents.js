@@ -5,15 +5,8 @@ import { connect } from 'react-redux';
 import { updateEvents } from '../ducks/eventsReducer';
 import UsersEventList from './UsersEventList';
 import EventsMap from '../Components/maps/EventsMap'
-import {FacebookShareButton, TwitterShareButton, EmailShareButton,WhatsappShareButton, FacebookIcon, TwitterIcon, EmailIcon, WhatsappIcon} from 'react-share'
+import { FacebookShareButton, TwitterShareButton, EmailShareButton, WhatsappShareButton, FacebookIcon, TwitterIcon, EmailIcon, WhatsappIcon } from 'react-share'
 import '../styles/modal.css'
-
-
-
-
-
-import { withScriptjs, withGoogleMap, GoogleMap } from 'react-google-maps'
-import EventsMarker from '../Components/maps/EventsMarker'
 
 class BrowseEvents extends Component {
    constructor(props) {
@@ -25,7 +18,7 @@ class BrowseEvents extends Component {
          filteredUserEvents: [],
          filteredEbEvents: [],
          openedModal: null
-        
+
       }
       this.getUserEvents = this.getUserEvents.bind(this)
       this.handleInputChange = this.handleInputChange.bind(this)
@@ -34,8 +27,7 @@ class BrowseEvents extends Component {
 
    }
 
-   componentDidUpdate(prevProps, prevState) {
-      console.log('didUPDATEfired')
+   componentDidUpdate(prevProps) {
       const { userLocation, updateEvents, events } = this.props;
       if (prevProps.userLocation !== userLocation && userLocation.city || events.length === 0) updateEvents(userLocation);
    }
@@ -45,11 +37,11 @@ class BrowseEvents extends Component {
    }
    openModal = id => {
       this.setState({ openedModal: id });
-    };
-    closeModal = () => {
+   };
+   closeModal = () => {
       this.setState({ openedModal: null });
-    };
-  
+   };
+
    getUserEvents(eventArr) {
       this.setState({ userEvents: eventArr })
    }
@@ -80,7 +72,6 @@ class BrowseEvents extends Component {
             return event.title.toLowerCase().includes(filterTitles.toLowerCase());
          })
       }
-
       // grab events from eventbrite		
 
       let filteredEbEvents = [...this.props.events]
@@ -110,132 +101,130 @@ class BrowseEvents extends Component {
       })
    }
    render() {
-    
+
       const events = this.state.filteredEbEvents.length > 0
-         ?  this.state.filteredEbEvents     
-         :  this.props.events
+         ? this.state.filteredEbEvents
+         : this.props.events
 
       //Events
       const eventsMapped = this.state.filteredEbEvents === 'no results'
-         ?  null
-         :  events.length > 0 && events.map((event, i) => {
-         return (
-            <div className='event-row' key={i}>
-               <div className="event-image">
-                  <img src={event.logo !== null
-                     ? event.logo.url
-                     : 'http://placekitten.com/200'} alt='Event' />
-               </div>
+         ? null
+         : events.length > 0 && events.map((event, i) => {
+            return (
+               <div className='event-row' key={i}>
+                  <div className="event-image">
+                     <img src={event.logo !== null
+                        ? event.logo.url
+                        : 'http://placekitten.com/200'} alt='Event' />
+                  </div>
 
-               <div className='event-info'>
-                  <Link to={{
-                     pathname: '/events/view',
-                     state: {
-                        title: event.name.text,
-                        organizer: !event.organizer.description.text ? 'Unknown Organizer' : event.organizer.description.text,
-                        description: event.description.text,
-                        startTime: event.start.local,
-                        endTime: event.end.local,
-                        img: event.logo !== null
-                           ? event.logo.url
-                           : 'http://placekitten.com/200',
-                        address: event.venue.address.localized_address_display,
-                        type: 'eventbrite'
-                     }
-                  }}>
+                  <div className='event-info'>
+                     <Link to={{
+                        pathname: '/events/view',
+                        state: {
+                           title: event.name.text,
+                           organizer: !event.organizer.description.text ? 'Unknown Organizer' : event.organizer.description.text,
+                           description: event.description.text,
+                           startTime: event.start.local,
+                           endTime: event.end.local,
+                           img: event.logo !== null
+                              ? event.logo.url
+                              : 'http://placekitten.com/200',
+                           address: event.venue.address.localized_address_display,
+                           type: 'eventbrite'
+                        }
+                     }}>
 
-                     <h3>{event.name.text}</h3>
-                  </Link>
-                  <p>start {event.start.local} / end {event.end.local}</p>
-                  <p>LOCATION: {event.venue.address.localized_address_display}</p>
+                        <h3>{event.name.text}</h3>
+                     </Link>
+                     <p>start {event.start.local} / end {event.end.local}</p>
+                     <p>LOCATION: {event.venue.address.localized_address_display}</p>
+                  </div>
+
+                  <div> <Button color="white" onClick={() => this.openModal(event.id)}><img src="https://img.icons8.com/ios-glyphs/24/000000/share.png" /></Button>
+                     <Modal isOpen={this.state.openedModal === event.id} toggle={this.closeModal} className={this.props.className}>
+                        <ModalHeader >{event.name.text}</ModalHeader>
+                        <ModalBody className="modalbody">
+                           <FacebookShareButton
+                              url={event.url}
+                              title={event.name.text}>
+                              <FacebookIcon
+                                 size={45}
+                                 round />
+                           </FacebookShareButton>
+                           <TwitterShareButton
+                              url={event.url}
+                              title={event.name.text}>
+                              <TwitterIcon
+                                 size={45}
+                                 round />
+                           </TwitterShareButton>
+                           <EmailShareButton
+                              url={event.url}
+                              title={event.name.text}>
+                              <EmailIcon
+                                 size={45}
+                                 round />
+                           </EmailShareButton>
+                           <WhatsappShareButton
+                              url={event.url}
+                              title={event.name.text}>
+                              <WhatsappIcon
+                                 size={45}
+                                 round />
+                           </WhatsappShareButton>
+
+                        </ModalBody>
+                        <ModalFooter>
+                           {' '}
+                           <Button color="secondary" onClick={this.closeModal}>Cancel</Button>
+                        </ModalFooter>
+                     </Modal></div>
+
                </div>
-               
-               <div> <Button color="white" onClick={() => this.openModal(event.id)}><img src="https://img.icons8.com/ios-glyphs/24/000000/share.png" /></Button>
-        <Modal isOpen={this.state.openedModal === event.id} toggle={this.closeModal} className={this.props.className}>
-          <ModalHeader >{event.name.text}</ModalHeader>
-          <ModalBody className ="modalbody">
-            <FacebookShareButton 
-            url={event.url}
-            title={event.name.text}>
-            <FacebookIcon
-            size ={45}
-            round />
-            </FacebookShareButton>
-            <TwitterShareButton 
-            url={event.url}
-            title={event.name.text}>
-            <TwitterIcon
-            size ={45}
-            round />
-            </TwitterShareButton>
-            <EmailShareButton 
-            url={event.url}
-            title={event.name.text}>
-            <EmailIcon
-            size ={45}
-            round />
-            </EmailShareButton>
-            <WhatsappShareButton 
-            url={event.url}
-            title={event.name.text}>
-            <WhatsappIcon
-            size ={45}
-            round />
-            </WhatsappShareButton>
-            
-          </ModalBody>
-          <ModalFooter>
-            {' '}
-            <Button color="secondary" onClick={this.closeModal}>Cancel</Button>
-          </ModalFooter>
-        </Modal></div>
-               
-            </div>
-         );
-      })
+            );
+         })
       return (
          <section className='browse-events'>
             <div>
 
-
                <form className='browse-form' onSubmit={this.filterEvents}>
-
 
                   <input
                      type='text'
                      placeholder='search within name'
 
-                     name='filterTitles'        
-                     value={this.state.filterTitles}        
+                     name='filterTitles'
+                     value={this.state.filterTitles}
                      onChange={this.handleInputChange}
                   />
                   <div className="filter">
 
                      <Input type="select"
 
-                        name='filterCategories'		
-                        value={this.state.filterCategories}		
+                        name='filterCategories'
+                        value={this.state.filterCategories}
                         onChange={this.handleInputChange}
-                        >
+                     >
                         <option value='auto'>Auto, Boat, and Air</option>
-                        <option value='business'>Business</option>		
-                        <option value='charity'>Charity and Causes</option>		
-                        <option value='family'>Family and Education</option>		
-                        <option value='fashion'>Fashion</option>		
-                        <option value='media'>Film and Media</option>		
-                        <option value='food'>Food and Drink</option>		
-                        <option value='government'>Government</option>		
-                        <option value='health'>Health</option>		
-                        <option value='hobbies'>Hobbies</option>		
-                        <option value='holiday'>Holiday</option>		
+                        <option value='business'>Business</option>
+                        <option value='charity'>Charity and Causes</option>
+                        <option value='family'>Family and Education</option>
+                        <option value='fashion'>Fashion</option>
+                        <option value='media'>Film and Media</option>
+                        <option value='food'>Food and Drink</option>
+                        <option value='government'>Government</option>
+                        <option value='health'>Health</option>
+                        <option value='hobbies'>Hobbies</option>
+                        <option value='holiday'>Holiday</option>
                         <option value='lifestyle'>Home and Lifestyle</option>
                         <option value='music'>Music</option>
                         <option value='other'>Other</option>
-                        <option value='performing'>Performing and Visual Arts</option>		
-                        <option value='school'>School Activities</option>		
-                        <option value='tech'>Science and Tech</option>		
-                        <option value='spirituality'>Spirituality</option>		
-                        <option value='sports'>Sports and Fitness</option>		
+                        <option value='performing'>Performing and Visual Arts</option>
+                        <option value='school'>School Activities</option>
+                        <option value='tech'>Science and Tech</option>
+                        <option value='spirituality'>Spirituality</option>
+                        <option value='sports'>Sports and Fitness</option>
                         <option value='outdoor'>Travel and Outdoor</option>
                      </Input>
                      <Button color="info" onClick={this.clearFilter}>clear</Button>{' '}
@@ -246,8 +235,8 @@ class BrowseEvents extends Component {
                </form>
 
                <UsersEventList
-                   getUserEvents={this.getUserEvents}
-                   filteredUserEvents={this.state.filteredUserEvents}
+                  getUserEvents={this.getUserEvents}
+                  filteredUserEvents={this.state.filteredUserEvents}
                />
                {eventsMapped}
 

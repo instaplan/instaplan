@@ -2,7 +2,7 @@ import Axios from 'axios';
 const initialState = {
    isSignedIn: false,
    userLocation: {}, // hold city and state keys
-   userLocationCoords: {lat: '', lng: ''},
+   userLocationCoords: { lat: '', lng: '' },
    userId: ''
 }
 const UPDATE_IS_SIGNED_IN = 'UPDATE_IS_SIGNED_IN';
@@ -30,19 +30,19 @@ export function updateUserId(str) {
 }
 
 export default function userReducer(state = initialState, action) {
-   const {type, payload} = action
-   switch(type) {
+   const { type, payload } = action
+
+   switch (type) {
       case UPDATE_IS_SIGNED_IN:
          return {
             ...state,
             isSignedIn: payload
          }
       case `${UPDATE_USER_IPLOCATION}_FULFILLED`:
-         console.log(payload)
          return {
             ...state,
-            userLocation: {city: payload.city, state: payload.region},
-            userLocationCoords: {lat: payload.lat, lng: payload.lon}
+            userLocation: { city: payload.city, state: payload.region },
+            userLocationCoords: { lat: payload.lat, lng: payload.lon }
          }
       case UPDATE_USER_ID:
          return {

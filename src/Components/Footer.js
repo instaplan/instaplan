@@ -1,18 +1,18 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function Footer() {
    return (
       <footer>
          <ul className='footer'>
-         <p>&copy;2019 The Instaplan Group</p>
+            <p>&copy;2019 The Instaplan Group</p>
             <div>
                <li><Link to='/about'>About</Link></li>
             </div>
             <div>
                <li><Link to='/contact'>Contact</Link></li>
             </div>
-            <div>   
+            <div>
                <li>Follow Us</li>
                <ul>
                   <li><a href='https://www.facebook.com' target='_blank' rel='noopener noreferrer'>Facebook</a></li>
