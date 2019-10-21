@@ -21,9 +21,6 @@ package-lock.json
 .env
 /src/config
 
-package-lock.json
-
-
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
