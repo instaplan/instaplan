@@ -14,9 +14,7 @@ const UPDATE_FILTER_QUERY = 'UPDATE_FILTER_QUERY';
 export function updateEvents(locationObj) {
    return {
       type: UPDATE_EVENTS,
-      payload: Axios
-         .post('/api/ebevents/', locationObj)
-         .then(res => res.data)
+      payload: Axios.post('/api/ebevents/', locationObj)
    }
 }
 export function updateFilterCategory(str) {
@@ -33,12 +31,16 @@ export function updateFilterQuery(str) {
 }
 export default function eventsReducer(state = initialState, action) {
    const { type, payload } = action
+   console.log(payload)
    switch (type) {
       case `${UPDATE_EVENTS}_FULFILLED`:
          return {
             ...state,
-            events: payload
+            events: payload.data
          }
+      case `${UPDATE_EVENTS}_REJECTED`:
+         console.log(payload.err)
+         return {...state}
       case UPDATE_FILTER_CATEGORY:
          return {
             ...state,

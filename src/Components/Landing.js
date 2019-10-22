@@ -6,47 +6,54 @@ import { connect } from 'react-redux';
 function Landing(props) {
    const { events } = props;
 
+   let carouselItems = [], featuredEvents = [];
+   console.log(events)
+
    // 'carousel' item count (alter slice)
-   const carouselItems = events.length > 0 && events.slice(0, 3).map(event => {
-      return (
-         {
-            src: event.logo !== null ? event.logo.url : 'http://placekitten.com/200',
-            altText: 'Featured',
-            caption: `By ${!event.organizer.description.text ? 'Unknown Organizer' : event.organizer.description.text}`,
-            header: event.name.text
-         }
-      );
-   });
+   if (events) {
+      carouselItems = events.slice(0, 3).map(event => {
+         return (
+            {
+               src: event.logo !== null ? event.logo.url : 'http://placekitten.com/200',
+               altText: 'Featured',
+               caption: `By ${!event.organizer.description.text ? 'Unknown Organizer' : event.organizer.description.text}`,
+               header: event.name.text
+            }
+         );
+      });
+
+      featuredEvents = events.slice(0, 4).map(event => {
+         return (
+            <article>
+               <figure>
+                  <img src={event.logo !== null ? event.logo.url : 'http://placekitten.com/200'} alt='Featured Event' />
+                  <figcaption>{`${event.name.text.substring(0, 30)}...`}</figcaption>
+               </figure>
+               <p>Start: {event.start.local} / End: {event.end.local}</p>
+               <p>{event.venue.address.localized_address_display}</p>
+               <p>{event.description.text.substring(0, 100)}<Link to={{
+                  pathname: '/events/view',
+                  state: {
+                     title: event.name.text,
+                     organizer: !event.organizer.description.text ? 'Unknown Organizer' : event.organizer.description.text,
+                     description: event.description.text,
+                     startTime: event.start.local,
+                     endTime: event.end.local,
+                     img: event.logo !== null
+                        ? event.logo.url
+                        : 'http://placekitten.com/200',
+                     address: event.venue.address.localized_address_display,
+                     type: 'eventbrite'
+                  }
+               }}>...more</Link>
+               </p>
+            </article>
+         );
+      });
+   }
+
 
    // 'featured items' item count (alter slice)
-   const featuredEvents = events.length > 0 && events.slice(0, 4).map(event => {
-      return (
-         <article>
-            <figure>
-               <img src={event.logo !== null ? event.logo.url : 'http://placekitten.com/200'} alt='Featured Event' />
-               <figcaption>{`${event.name.text.substring(0, 30)}...`}</figcaption>
-            </figure>
-            <p>Start: {event.start.local} / End: {event.end.local}</p>
-            <p>{event.venue.address.localized_address_display}</p>
-            <p>{event.description.text.substring(0, 100)}<Link to={{
-               pathname: '/events/view',
-               state: {
-                  title: event.name.text,
-                  organizer: !event.organizer.description.text ? 'Unknown Organizer' : event.organizer.description.text,
-                  description: event.description.text,
-                  startTime: event.start.local,
-                  endTime: event.end.local,
-                  img: event.logo !== null
-                     ? event.logo.url
-                     : 'http://placekitten.com/200',
-                  address: event.venue.address.localized_address_display,
-                  type: 'eventbrite'
-               }
-            }}>...more</Link>
-            </p>
-         </article>
-      );
-   });
 
    return (
 
