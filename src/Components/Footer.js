@@ -10,6 +10,9 @@ function Footer() {
                <li><Link to='/about'>About</Link></li>
             </div>
             <div>
+               <li><Link to='/privacy'>Privacy</Link></li>
+            </div>
+            <div>
                <li><Link to='/contact'>Contact</Link></li>
             </div>
             <div>

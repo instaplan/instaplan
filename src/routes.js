@@ -9,6 +9,7 @@ import Contact from './Components/Contact';
 import NotFound404 from './Components/NotFound404';
 import Authorization from './component/authorization';
 import MyEvents from './Components/Myevents'
+import PrivacyPolicy from './Components/PrivacyPolicy';
 
 
 export default (
@@ -20,6 +21,7 @@ export default (
       <Route component={About} path='/about' />
       <Route component={Contact} path='/contact' />
       <Route component={MyEvents} path='/myevents' />
+      <Route component={PrivacyPolicy} path='/privacy' />
       <Route component={NotFound404} />
    </Switch>
 );
