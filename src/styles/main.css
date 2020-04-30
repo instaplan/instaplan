@@ -6,6 +6,26 @@ body {
   font-family: 'Asap', sans-serif;
 }
 
+.deprecation-warning {
+  padding: 5px;
+  display: flex;
+  background-color: rgb(255, 255, 179);
+}
+
+.deprecation-warning span {
+  font-weight: 900;
+}
+
+.clear-deprecation-warning {
+  margin-left: 25px;
+  margin-right: 25px;
+  color: red;
+}
+
+.clear-deprecation-warning span {
+  cursor: pointer;
+}
+
 .navbar-toggler {
   width: 50px;
 }

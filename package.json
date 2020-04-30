@@ -2,8 +2,8 @@
   "name": "instaplan",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:4000",
-  "main": "server/index",
+  "proxy": "http://localhost:5053",
+  "main": "server/instaplan.js",
   "dependencies": {
     "aws-sdk": "^2.495.0",
     "axios": "^0.19.0",
