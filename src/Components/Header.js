@@ -19,10 +19,12 @@ class Header extends Component {
    constructor(props) {
       super(props);
       this.state = {
-         isOpen: false //toggle for navbar
+         isOpen: false, //toggle for navbar
+         showDepWarning: true
       };
       this.handleSignOut = this.handleSignOut.bind(this);
       this.toggle = this.toggle.bind(this);
+      this.hideDepWarning = this.hideDepWarning.bind(this);
    }
    componentDidMount() {
       const { updateUserIPLocation } = this.props;
@@ -44,10 +46,30 @@ class Header extends Component {
       this.props.history.push('/');
       firebase.auth().signOut()
    }
+   hideDepWarning() {
+      this.setState({ showDepWarning: false })
+   }
    render() {
+      console.log(this.props.userLocation)
 
       return (
          <header>
+            {
+               this.state.showDepWarning
+                  ? (
+                     <section className='deprecation-warning'>
+                        <div>
+                           <p><span>NOTICE:</span> This group project heavily depended on the EventBrite API's public events search feature. EB discontinued access to this API on Dec 12, 2019. This project was published in July of 2019. As a result, most site features do not work properly, but the spirit of the project still exists in the code!</p>
+                           <p>For more info on EventBrite's decision, see <a href='https://www.eventbrite.com/platform/api#/reference/event-search' target='_blank' rel='noreferrer'>the official notice</a>.</p>
+                        </div>
+                        <div className='clear-deprecation-warning'>
+                           <p>[<span onClick={this.hideDepWarning}>X</span>]</p>
+                        </div>
+
+                     </section>
+                  ) : null
+            }
+
             <Navbar color="white" light expand="md">
                <NavbarBrand href="/">Instaplan | {this.props.userLocation.city}, {this.props.userLocation.state}</NavbarBrand>
                <NavbarToggler onClick={this.toggle} />

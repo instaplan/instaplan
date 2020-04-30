@@ -20,8 +20,8 @@ massive(CONNECTION_STRING).then(db => {
 const transporter = nodemailer.createTransport(
    {
       host: EMAIL_HOST,
-      port: 587,
-      secure: false,
+      port: 465,
+      secure: true,
       auth: {
          user: EMAIL_NAME,
          pass: EMAIL_PW
