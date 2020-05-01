@@ -10,6 +10,9 @@ const addImg = require('./controllers/addImg');
 const { SERVER_PORT, CONNECTION_STRING, EMAIL_HOST, EMAIL_NAME, EMAIL_PW } = process.env
 
 const app = express();
+
+app.use(express.static(`${__dirname}/../build`));
+
 app.use(express.json({ limit: '10mb' }));
 
 massive(CONNECTION_STRING).then(db => {
